@@ -1,13 +1,15 @@
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using AppliedSystems.Core;
 using AppliedSystems.Core.Diagnostics;
 using AppliedSystems.Messaging.Infrastructure;
 using EventStore.ClientAPI;
 
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Writing.Persistent
+namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Writing
 {
-    public class PersistentWriteEventStreamConnection : Disposable, IWriteEventStreamConnection
+    public class PersistentWriteEventStreamConnection : Disposable
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
 
@@ -20,14 +22,15 @@ namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Writing.
             this.credentials = credentials;
         }
 
-        public async Task AppendToStream(string streamName, Message toStore)
+        public async Task AppendToStream(string streamName, IEnumerable<Message> toStore)
         {
             Trace.Information("Appending the current message to the event store stream {0}", streamName);
+
             await connection.AppendToStreamAsync(
                 streamName, 
                 ExpectedVersion.Any, 
                 credentials, 
-                toStore.ToEventStoreEventData());
+                toStore.Select(m => m.ToEventStoreEventData()).ToArray());
         }
         
         public void Close()

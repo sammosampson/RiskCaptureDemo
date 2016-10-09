@@ -1,7 +1,5 @@
 namespace AppliedSystems.RiskCapture.Service
 {
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing;
-
     public class RiskCaptureId
     {
         private readonly string id;

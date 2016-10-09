@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading.Persistent
+namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
 {
     public static class ByteExtensions
     {

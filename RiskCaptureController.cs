@@ -13,17 +13,14 @@ namespace AppliedSystems.RiskCapture.Service
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
 
         private readonly IMessageReceiver receiver;
-        private readonly EventStreamConnectionManager eventStreamConnectionManager;
 
-        public RiskCaptureController(IMessageReceiver receiver, EventStreamConnectionManager eventStreamConnectionManager)
+        public RiskCaptureController(IMessageReceiver receiver)
         {
             this.receiver = receiver;
-            this.eventStreamConnectionManager = eventStreamConnectionManager;
         }
 
         public void Start()
         {
-            eventStreamConnectionManager.Start();
             receiver.StartReceiving(OnException);
         }
 
@@ -42,7 +39,6 @@ namespace AppliedSystems.RiskCapture.Service
         public void Stop()
         {
             Trace.Information("Stopping the risk capture service");
-            eventStreamConnectionManager.Stop();
             receiver.StopReceiving();
         }
     }

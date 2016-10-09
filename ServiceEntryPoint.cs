@@ -25,11 +25,15 @@
         static void Main()
         {
             var config = RiskCaptureHttpMessageReceivingConfiguration.FromAppConfig();
-
             var receivePoint = RiskCaptureHttpReceivePoint.ListenOn(HttpMessagingReceiverUrl.Parse(config.Url));
-
             var eventStorageConfig = MessageStorageConfiguration.FromAppConfig();
-            var eventStoreEndpoint = new EventStoreEventDispatchingEndpoint();
+
+            var eventStoreEndpoint = EventStoreEndpoint
+                .OnUrl(MessageStorageUrl.Parse(eventStorageConfig.Url))
+                .WithCredentials(
+                    MessageStorageUserCredentials.Parse(
+                        eventStorageConfig.UserCredentials.User,
+                        eventStorageConfig.UserCredentials.Password));
 
             HostFactory.Run(configurator =>
             {
@@ -40,17 +44,11 @@
                     .ConfigureRiskCapture()
                     .SetupData()
                     .SetupMessaging()
-                        .ConfigureHttpMessaging<IncomingMessageConverter>()
-                        .ConfigureEventStore(
-                            MessageStorageMode.Parse(eventStorageConfig.StorageMode),
-                            MessageStorageUrl.Parse(eventStorageConfig.Url),
-                            MessageStorageUserCredentials.Parse(
-                                eventStorageConfig.UserCredentials.User,
-                                eventStorageConfig.UserCredentials.Password))
+                        .ConfigureHttpMessaging<IncomingMessageConverter>()    
                         .ConfigureSagas().WithDatabasePersistence()
                         .ConfigureReceivingEndpoint(receivePoint)
-                        .ConfigureEventDispatchingEndpoint(eventStoreEndpoint)
-                        .ConfigureMessageRouting().WireUpRouting(eventStoreEndpoint)
+                        .ConfigureEventStoreEndpoint(eventStoreEndpoint)
+                        .ConfigureMessageRouting().WireUpRouting()
                     .Initialise();
 
                 Trace.TraceInformation(

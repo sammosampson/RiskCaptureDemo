@@ -1,16 +1,23 @@
+using System;
 using AppliedSystems.Core;
 using AppliedSystems.Messaging.Infrastructure;
-using AppliedSystems.Messaging.Infrastructure.Events.Streams;
 
 namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
 {
-    public class EventStreamStoragePipe : IMessagePipe
+    public class MessageSessionPipe : IMessagePipe
     {
+        private readonly MessageSession session;
         
+        public MessageSessionPipe(MessageSession session)
+        {
+            this.session = session;
+        }
+
         public NotRequired<Message> ProcessMessage(Message message)
         {
-            WriteEventStreamConnectionContext.Current.AppendToStream(message.GetHeader(new EventStreamIdMessageHeaderKey(), s => s), message).Wait();
+            session.Add(message);
             return message;
         }
+
     }
 }

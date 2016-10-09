@@ -4,7 +4,7 @@ using AppliedSystems.Messaging.Infrastructure;
 using AppliedSystems.Messaging.Infrastructure.Headers;
 using EventStore.ClientAPI;
 
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading.Persistent
+namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading
 {
     public static class ResolvedEventExtensions
     {

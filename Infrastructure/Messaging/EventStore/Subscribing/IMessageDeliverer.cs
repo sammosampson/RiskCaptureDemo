@@ -1,6 +1,6 @@
 using AppliedSystems.Messaging.Infrastructure;
 
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading
+namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Subscribing
 {
     public interface IMessageDeliverer
     {

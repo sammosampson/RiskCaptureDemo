@@ -5,13 +5,11 @@ namespace AppliedSystems.RiskCapture.Service.Bootstrapping
 
     public static class MessageRoutingConfigurationExtensions
     {
-        public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config, IEventDispatchingEndpoint eventStoreEndpoint)
+        public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config)
         {
             return config
                 .Incoming.ForCommands
-                    .Handle<ProcessRiskCaptureRequest>().With<ProcessRiskCaptureRequestHandler>()
-                .Outgoing.ForEvents
-                    .Send<RiskCaptureProcessed>().ViaEndpoint(eventStoreEndpoint).ToEventStream("Test");
+                    .Handle<ProcessRiskCaptureRequest>().With<ProcessRiskCaptureRequestHandler>();
         }
     }
 }

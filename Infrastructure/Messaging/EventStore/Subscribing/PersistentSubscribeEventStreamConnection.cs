@@ -1,17 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using AppliedSystems.Core;
 using AppliedSystems.Core.Diagnostics;
 using AppliedSystems.Messaging.Infrastructure;
 using AppliedSystems.Messaging.Infrastructure.Headers;
 using EventStore.ClientAPI;
 
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading.Persistent
+namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Subscribing
 {
-    public class PersistentReadEventStreamConnection : Disposable, IReadEventStreamConnection
+    public class PersistentSubscribeEventStreamConnection : Disposable
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
 
@@ -19,36 +17,25 @@ namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading.
         private readonly IMessageDeliverer messageDeliverer;
         private readonly MessageStorageUserCredentials credentials;
 
-        public PersistentReadEventStreamConnection(IEventStoreConnection connection, IMessageDeliverer messageDeliverer, MessageStorageUserCredentials credentials)
+        public PersistentSubscribeEventStreamConnection(IEventStoreConnection connection, IMessageDeliverer messageDeliverer, MessageStorageUserCredentials credentials)
         {
             this.connection = connection;
             this.messageDeliverer = messageDeliverer;
             this.credentials = credentials;
         }
 
-        public IReadEventStreamSubscription SubscribeToStream(string stream, int lastEventIndex)
+        public PersistentEventStreamSubscription SubscribeToStream(string stream, int lastEventIndex)
         {
-            EventStoreStreamCatchUpSubscription subscription = connection.SubscribeToStreamFrom(stream, lastEventIndex, true, OnEventAppeared, OnLiveProcessingStarted, OnSubscriptionDropped, credentials);
-            return new PersistentReadEventStreamSubscription(subscription);
-        }
+            EventStoreStreamCatchUpSubscription subscription = connection.SubscribeToStreamFrom(
+                stream, 
+                lastEventIndex, 
+                true, 
+                OnEventAppeared, 
+                OnLiveProcessingStarted, 
+                OnSubscriptionDropped, 
+                credentials);
 
-        public IEnumerable<Message> RetreiveAllEventsFromStream(string stream)
-        {
-            var messages = new List<Message>();
-
-            StreamEventsSlice currentSlice;
-            var nextSliceStart = StreamPosition.Start;
-            do
-            {
-                currentSlice = connection.ReadStreamEventsForwardAsync(stream, nextSliceStart, 200, false).Result;
-
-                nextSliceStart = currentSlice.NextEventNumber;
-
-                messages.AddRange(currentSlice.Events.Select(e => e.ToMessage()));
-            }
-
-            while (!currentSlice.IsEndOfStream);
-            return messages;
+            return new PersistentEventStreamSubscription(subscription);
         }
 
         public void Close()

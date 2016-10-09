@@ -5,18 +5,9 @@ namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
 
     public class EventStoreConnector
     {
-        private readonly MessageStorageUrl url;
-        private readonly IEventStoreConnectionFactory eventStoreConnectionFactory;
-
-        public EventStoreConnector(MessageStorageUrl url, IEventStoreConnectionFactory eventStoreConnectionFactory)
+        public async Task<IEventStoreConnection> Connect(MessageStorageUrl url)
         {
-            this.url = url;
-            this.eventStoreConnectionFactory = eventStoreConnectionFactory;
-        }
-
-        public async Task<IEventStoreConnection> Connect()
-        {
-            var eventStoreConnection = eventStoreConnectionFactory.Create(url);
+            var eventStoreConnection = EventStoreConnection.Create(url);
             await eventStoreConnection.ConnectAsync();
             return eventStoreConnection;
         }

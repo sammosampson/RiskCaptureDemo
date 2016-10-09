@@ -1,22 +1,16 @@
 namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AppliedSystems.Messaging.Infrastructure.Events;
     using AppliedSystems.Messaging.Messages;
 
     public class DomainRepository
     {
-        private readonly IEventRetreiver eventRetreiver;
-        private readonly IEventDispatcher dispatcher;
-        private readonly IEventStreamFactory eventStreamFactory;
+        private readonly IEventStore store;
 
-        public DomainRepository(IEventRetreiver eventRetreiver, IEventDispatcher dispatcher, IEventStreamFactory eventStreamFactory)
+        public DomainRepository(IEventStore store)
         {
-            this.eventRetreiver = eventRetreiver;
-            this.dispatcher = dispatcher;
-            this.eventStreamFactory = eventStreamFactory;
+            this.store = store;
         }
 
         public bool Exists(string aggregateRootId)
@@ -35,18 +29,12 @@ namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing
         public void Save<TAggregateRoot>(TAggregateRoot aggregateRoot)
             where TAggregateRoot : AggregateRoot
         {
-            using (eventStreamFactory.Create(aggregateRoot.GetEventStreamId()))
-            {
-                foreach (IEvent @event in aggregateRoot.EventsAdded)
-                {
-                    dispatcher.Raise(@event);
-                }
-            }
+            store.StoreEvents(aggregateRoot.GetEventStreamId(), aggregateRoot.EventsAdded);
         }
 
         IEnumerable<IEvent> GetEvents(string aggregateRootId)
         {
-            return eventRetreiver.GetEvents(aggregateRootId).ToList();
+            return store.GetEvents(aggregateRootId).ToList();
         }
     }
 }
