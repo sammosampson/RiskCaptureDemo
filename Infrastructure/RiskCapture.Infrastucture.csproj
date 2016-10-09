@@ -184,7 +184,7 @@
     <Compile Include="Messaging\EventSourcing\EventSourceEventArgs.cs" />
     <Compile Include="Messaging\EventSourcing\IEventStore.cs" />
     <Compile Include="Messaging\EventSourcing\SourcedEventHandler.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\Class1.cs" />
+    <Compile Include="Messaging\EventStore\Bootstrapping\MessagingConfigurationExtensions.cs" />
     <Compile Include="Messaging\EventStore\Bootstrapping\EventStoreEndpointHasInvalidBuilderException.cs" />
     <Compile Include="Messaging\EventStore\Bootstrapping\IocContainerExtensions.cs" />
     <Compile Include="Messaging\EventStore\EventStoreEndpoint.cs" />
