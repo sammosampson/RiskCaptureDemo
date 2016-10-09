@@ -2,11 +2,11 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing
 {
     using global::EventStore.ClientAPI;
 
-    public class PersistentEventStreamSubscription
+    public class EventStreamSubscription
     {
         private readonly EventStoreStreamCatchUpSubscription inner;
 
-        public PersistentEventStreamSubscription(EventStoreStreamCatchUpSubscription inner)
+        public EventStreamSubscription(EventStoreStreamCatchUpSubscription inner)
         {
             this.inner = inner;
         }

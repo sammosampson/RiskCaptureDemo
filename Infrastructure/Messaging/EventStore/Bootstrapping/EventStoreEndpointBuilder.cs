@@ -1,5 +1,5 @@
 
-namespace AppliedSystems.Infrastucture.Messaging.EventStore
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping
 {
     using System.Diagnostics;
     using AppliedSystems.Messaging.Infrastructure.Pipelines;
@@ -12,10 +12,10 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
 
-        private readonly PersistentWriteEventStreamConnector writeEventStreamConnector;
+        private readonly WriteEventStreamConnector writeEventStreamConnector;
         private readonly PersistentReadEventStreamConnector readEventStreamConnector;
 
-        public EventStoreEndpointBuilder(PersistentWriteEventStreamConnector writeEventStreamConnector, PersistentReadEventStreamConnector readEventStreamConnector)
+        public EventStoreEndpointBuilder(WriteEventStreamConnector writeEventStreamConnector, PersistentReadEventStreamConnector readEventStreamConnector)
         {
             this.writeEventStreamConnector = writeEventStreamConnector;
             this.readEventStreamConnector = readEventStreamConnector;
@@ -25,7 +25,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore
         {           
             Trace.Information("Opening the event stream writer connection");
 
-            PersistentWriteEventStreamConnection writeConnection = writeEventStreamConnector.Connect(endpoint.Url, endpoint.Credentials).Result;
+            WriteEventStreamConnection writeConnection = writeEventStreamConnector.Connect(endpoint.Url, endpoint.Credentials).Result;
             PersistentReadEventStreamConnection readConnection = readEventStreamConnector.Connect(endpoint.Url).Result;
         
             return new PersistentEventStore(pipelineBuilder, writeConnection, readConnection);

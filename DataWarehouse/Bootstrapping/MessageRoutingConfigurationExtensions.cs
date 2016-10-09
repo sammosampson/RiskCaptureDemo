@@ -1,15 +1,15 @@
-namespace AppliedSystems.RiskCapture.Bootstrapping
+namespace AppliedSystems.DataWarehouse.Bootstrapping
 {
-    using Messages;
     using Messaging.Infrastructure.Bootstrapping;
+    using RiskCapture.Messages;
 
     public static class MessageRoutingConfigurationExtensions
     {
         public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config)
         {
             return config
-                .Incoming.ForCommands
-                    .Handle<ProcessRiskCaptureRequest>().With<ProcessRiskCaptureRequestHandler>();
+                .Incoming.ForEvents
+                    .Handle<RiskCaptureProcessed>().With<RiskCaptureProcessedHandler>();
         }
     }
 }

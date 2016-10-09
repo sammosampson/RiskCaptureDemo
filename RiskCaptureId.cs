@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture.Service
+namespace AppliedSystems.RiskCapture
 {
     public class RiskCaptureId
     {
@@ -6,7 +6,7 @@ namespace AppliedSystems.RiskCapture.Service
 
         public static RiskCaptureId Parse(int id)
         {
-            return new RiskCaptureId("RiskCapture|" + id);
+            return new RiskCaptureId("riskcapture-" + id);
         }
 
         private RiskCaptureId(string id)

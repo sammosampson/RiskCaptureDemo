@@ -13,13 +13,13 @@
 
     public class PersistentEventStore : IEventStore
     {
-        private readonly PersistentWriteEventStreamConnection writeConnection;
+        private readonly WriteEventStreamConnection writeConnection;
         private readonly PersistentReadEventStreamConnection readConnection;
         private readonly MessageSession currentMessageSession;
         private readonly MessagePipeline pipe;
 
 
-        public PersistentEventStore(MessagePipelineBuilder messagePipelineBuilder, PersistentWriteEventStreamConnection writeConnection, PersistentReadEventStreamConnection readConnection)
+        public PersistentEventStore(MessagePipelineBuilder messagePipelineBuilder, WriteEventStreamConnection writeConnection, PersistentReadEventStreamConnection readConnection)
         {
             this.writeConnection = writeConnection;
             this.readConnection = readConnection;

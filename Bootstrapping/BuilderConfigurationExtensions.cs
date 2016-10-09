@@ -1,4 +1,4 @@
-﻿namespace AppliedSystems.RiskCapture.Service.Bootstrapping
+﻿namespace AppliedSystems.RiskCapture.Bootstrapping
 {
     using SystemDot.Bootstrapping;
 

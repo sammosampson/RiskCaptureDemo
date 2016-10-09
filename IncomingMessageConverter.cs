@@ -1,8 +1,9 @@
-﻿namespace AppliedSystems.RiskCapture.Service
+﻿namespace AppliedSystems.RiskCapture
 {
-    using AppliedSystems.Core;
-    using AppliedSystems.Messaging.Infrastructure;
+    using Core;
     using Infrastucture.Messaging.Http;
+    using Messages;
+    using Messaging.Infrastructure;
 
     public class IncomingMessageConverter : IIncomingMessageConverter
     {

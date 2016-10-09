@@ -11,7 +11,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore.Reading
             this.connector = connector;
         }
 
-        public async Task<PersistentReadEventStreamConnection> Connect(MessageStorageUrl url)
+        public async Task<PersistentReadEventStreamConnection> Connect(EventStoreUrl url)
         {
             var eventStoreConnection = await connector.Connect(url);
             return new PersistentReadEventStreamConnection(eventStoreConnection);

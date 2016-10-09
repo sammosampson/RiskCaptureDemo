@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.DataWarehouse
 {
     using System;
     using System.Diagnostics;
@@ -7,13 +7,13 @@ namespace AppliedSystems.RiskCapture
     using Messaging.Infrastructure;
     using Messaging.Infrastructure.Receiving;
 
-    public class RiskCaptureController
+    public class DataWareHouseController
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
 
         private readonly IMessageReceiver receiver;
 
-        public RiskCaptureController(IMessageReceiver receiver)
+        public DataWareHouseController(IMessageReceiver receiver)
         {
             this.receiver = receiver;
         }
@@ -21,6 +21,7 @@ namespace AppliedSystems.RiskCapture
         public void Start()
         {
             receiver.StartReceiving(OnException);
+            MessageReceivingContext.Events.Subscribe("riskcaptures");
         }
 
         private void OnException(Exception exception, NotRequired<Message> message)
@@ -37,7 +38,8 @@ namespace AppliedSystems.RiskCapture
 
         public void Stop()
         {
-            Trace.Information("Stopping the risk capture service");
+            Trace.Information("Stopping the data warehouse service");
+            MessageReceivingContext.Events.Unsubscribe("riskcaptures");
             receiver.StopReceiving();
         }
     }

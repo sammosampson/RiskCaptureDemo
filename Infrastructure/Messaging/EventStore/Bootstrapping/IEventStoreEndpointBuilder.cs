@@ -1,4 +1,4 @@
-namespace AppliedSystems.Infrastucture.Messaging.EventStore
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping
 {
     using AppliedSystems.Messaging.Infrastructure.Pipelines;
     using EventSourcing;

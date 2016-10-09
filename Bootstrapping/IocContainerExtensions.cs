@@ -1,7 +1,7 @@
-namespace AppliedSystems.RiskCapture.Service.Bootstrapping
+namespace AppliedSystems.RiskCapture.Bootstrapping
 {
     using SystemDot.Ioc;
-    using AppliedSystems.Messaging.Infrastructure.Receiving;
+    using Messaging.Infrastructure.Receiving;
 
     public static class IocContainerExtensions
     {

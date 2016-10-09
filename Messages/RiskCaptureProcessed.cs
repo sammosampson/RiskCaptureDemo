@@ -1,6 +1,6 @@
-namespace AppliedSystems.RiskCapture.Service
+namespace AppliedSystems.RiskCapture.Messages
 {
-    using AppliedSystems.Messaging.Messages;
+    using Messaging.Messages;
 
     public class RiskCaptureProcessed : IEvent
     {

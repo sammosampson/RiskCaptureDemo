@@ -1,6 +1,6 @@
 ﻿namespace AppliedSystems.Infrastucture.Messaging.EventStore.Configuration
 {
-    public class MessageStorageUserCredentialsConfiguration
+    public class EventStoreUserCredentialsConfiguration
     {
         public string User { get; set; }
         public string Password { get; set; }

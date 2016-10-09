@@ -1,23 +1,22 @@
-﻿namespace AppliedSystems.Infrastucture.Messaging.EventStore.Configuration
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Configuration
 {
     using System.Diagnostics.CodeAnalysis;
     using AppliedSystems.Configuration;
     using CodeAnalysis;
     using Core;
 
-    public class MessageStorageConfiguration
+    public class EventStoreSubscriptionConfiguration
     {
-        public static MessageStorageConfiguration FromAppConfig()
+        public static EventStoreSubscriptionConfiguration FromAppConfig()
         {
-            MessageStorageConfiguration configuration = ConfigurationReader.Read<MessageStorageConfiguration>();
+            EventStoreSubscriptionConfiguration configuration = ConfigurationReader.Read<EventStoreSubscriptionConfiguration>();
 
             if (configuration.DoesNotExist()
                 || configuration.Url.IsEmpty()
-                || configuration.StorageMode.IsEmpty()
                 || configuration.UserCredentials == null
                 || !configuration.UserCredentials.IsValid())
             {
-                throw new MessageStorageConfigurationException();
+                throw new EventStoreMessageStorageConfigurationException();
             }
 
             return configuration;
@@ -26,8 +25,6 @@
         [SuppressMessage(FxCop.Design, "CA1056:UriPropertiesShouldNotBeStrings", Justification = "Has to be string for config to work")]
         public string Url { get; set; }
 
-        public string StorageMode { get; set; }
-
-        public MessageStorageUserCredentialsConfiguration UserCredentials { get; set; }
+        public EventStoreUserCredentialsConfiguration UserCredentials { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore
 
     public class EventStoreConnector
     {
-        public async Task<IEventStoreConnection> Connect(MessageStorageUrl url)
+        public async Task<IEventStoreConnection> Connect(EventStoreUrl url)
         {
             var eventStoreConnection = EventStoreConnection.Create(url);
             await eventStoreConnection.ConnectAsync();

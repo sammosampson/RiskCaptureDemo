@@ -7,8 +7,8 @@
     <ProjectGuid>{67DEB30B-73B6-4D41-9C06-93C074FF3437}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppliedSystems.RiskCapture.Service</RootNamespace>
-    <AssemblyName>AppliedSystems.RiskCapture.Service</AssemblyName>
+    <RootNamespace>AppliedSystems.RiskCapture</RootNamespace>
+    <AssemblyName>AppliedSystems.RiskCapture</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -197,12 +197,10 @@
     <Compile Include="IncomingMessageConverter.cs" />
     <Compile Include="Bootstrapping\IocContainerExtensions.cs" />
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
-    <Compile Include="ProcessRiskCaptureRequest.cs" />
     <Compile Include="ProcessRiskCaptureRequestHandler.cs" />
-    <Compile Include="RiskCapture.cs" />
+    <Compile Include="RiskCapturer.cs" />
     <Compile Include="RiskCaptureController.cs" />
     <Compile Include="RiskCaptureId.cs" />
-    <Compile Include="RiskCaptureProcessed.cs" />
     <Compile Include="ServiceEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -214,6 +212,10 @@
     <ProjectReference Include="Infrastructure\Infrastucture.csproj">
       <Project>{AE8A4258-E846-4946-B6A3-ED65C561E836}</Project>
       <Name>Infrastucture</Name>
+    </ProjectReference>
+    <ProjectReference Include="Messages\RiskCapture.Messages.csproj">
+      <Project>{30006AE6-8522-493B-9E4D-AD5E288E9903}</Project>
+      <Name>RiskCapture.Messages</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,8 @@
-namespace AppliedSystems.RiskCapture.Service
+namespace AppliedSystems.RiskCapture
 {
-    using AppliedSystems.Messaging.Infrastructure.Commands;
     using Infrastucture.Messaging.EventSourcing;
+    using Messages;
+    using Messaging.Infrastructure.Commands;
 
     public class ProcessRiskCaptureRequestHandler : ICommandHandler<ProcessRiskCaptureRequest>
     {
@@ -14,7 +15,7 @@ namespace AppliedSystems.RiskCapture.Service
 
         public void Handle(ProcessRiskCaptureRequest message)
         {
-            var capture = repository.Get<RiskCapture>(RiskCaptureId.Parse(1));
+            var capture = repository.Get<RiskCapturer>(RiskCaptureId.Parse(2));
             capture.ProcessRequest(message.Request);
             repository.Save(capture);
         }

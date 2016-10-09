@@ -2,21 +2,21 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
     using System;
 
-    public class MessageStorageUrl
+    public class EventStoreUrl
     {
         private readonly Uri url;
 
-        public static MessageStorageUrl Parse(string @from)
+        public static EventStoreUrl Parse(string @from)
         {
-            return new MessageStorageUrl(@from);
+            return new EventStoreUrl(@from);
         }
 
-        public static implicit operator Uri(MessageStorageUrl from)
+        public static implicit operator Uri(EventStoreUrl from)
         {
             return @from.url;
         }
 
-        private MessageStorageUrl(string url)
+        private EventStoreUrl(string url)
         {
             this.url = new Uri(url);
         }

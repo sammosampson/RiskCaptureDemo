@@ -9,14 +9,14 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore.Writing
     using Core.Diagnostics;
     using global::EventStore.ClientAPI;
 
-    public class PersistentWriteEventStreamConnection : Disposable
+    public class WriteEventStreamConnection : Disposable
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
 
         private readonly IEventStoreConnection connection;
-        private readonly MessageStorageUserCredentials credentials;
+        private readonly EventStoreUserCredentials credentials;
 
-        public PersistentWriteEventStreamConnection(IEventStoreConnection connection, MessageStorageUserCredentials credentials)
+        public WriteEventStreamConnection(IEventStoreConnection connection, EventStoreUserCredentials credentials)
         {
             this.connection = connection;
             this.credentials = credentials;

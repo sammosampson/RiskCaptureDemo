@@ -1,8 +1,9 @@
-namespace AppliedSystems.RiskCapture.Service
+namespace AppliedSystems.RiskCapture
 {
     using Infrastucture.Messaging.EventSourcing;
+    using Messages;
 
-    public class RiskCapture : AggregateRoot
+    public class RiskCapturer : AggregateRoot
     {
         public void ProcessRequest(string request)
         {
