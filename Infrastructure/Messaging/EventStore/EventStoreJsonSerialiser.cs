@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
     using Newtonsoft.Json;
 

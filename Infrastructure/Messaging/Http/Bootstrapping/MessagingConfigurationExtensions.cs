@@ -1,6 +1,5 @@
-﻿namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.Http.Bootstrapping
+﻿namespace AppliedSystems.Infrastucture.Messaging.Http.Bootstrapping
 {
-    using SystemDot.Bootstrapping;
     using AppliedSystems.Messaging.Infrastructure.Bootstrapping;
 
     public static class MessagingConfigurationExtensions

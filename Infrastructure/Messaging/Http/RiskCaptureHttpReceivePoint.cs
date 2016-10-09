@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.Http
+namespace AppliedSystems.Infrastucture.Messaging.Http
 {
     using System;
     using AppliedSystems.Messaging.Http.Receiving;

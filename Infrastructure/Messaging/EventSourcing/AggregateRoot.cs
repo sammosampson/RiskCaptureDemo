@@ -1,10 +1,9 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing
+namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using AppliedSystems.Collections;
     using AppliedSystems.Messaging.Messages;
+    using Collections;
 
     public abstract class AggregateRoot
     {

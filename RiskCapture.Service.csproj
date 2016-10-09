@@ -211,9 +211,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Infrastructure\RiskCapture.Infrastucture.csproj">
+    <ProjectReference Include="Infrastructure\Infrastucture.csproj">
       <Project>{AE8A4258-E846-4946-B6A3-ED65C561E836}</Project>
-      <Name>RiskCapture.Infrastucture</Name>
+      <Name>Infrastucture</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

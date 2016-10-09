@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing
+namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
 {
     using System.Collections.Generic;
     using System.Linq;

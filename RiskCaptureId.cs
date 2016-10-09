@@ -6,7 +6,7 @@ namespace AppliedSystems.RiskCapture.Service
 
         public static RiskCaptureId Parse(int id)
         {
-            return new RiskCaptureId("Test");
+            return new RiskCaptureId("RiskCapture|" + id);
         }
 
         private RiskCaptureId(string id)

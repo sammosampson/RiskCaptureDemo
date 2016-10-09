@@ -1,8 +1,7 @@
-using System.Threading.Tasks;
-using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Subscribing;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Reading
 {
+    using System.Threading.Tasks;
+
     public class PersistentReadEventStreamConnector
     {
         private readonly EventStoreConnector connector;

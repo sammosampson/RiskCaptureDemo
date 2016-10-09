@@ -1,9 +1,9 @@
-﻿namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Configuration
+﻿namespace AppliedSystems.Infrastucture.Messaging.EventStore.Configuration
 {
     using System.Diagnostics.CodeAnalysis;
-    using AppliedSystems.CodeAnalysis;
     using AppliedSystems.Configuration;
-    using AppliedSystems.Core;
+    using CodeAnalysis;
+    using Core;
 
     public class MessageStorageConfiguration
     {

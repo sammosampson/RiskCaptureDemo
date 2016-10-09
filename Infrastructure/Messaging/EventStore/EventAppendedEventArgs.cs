@@ -1,8 +1,7 @@
-using AppliedSystems.Messaging.Messages;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
     using System;
+    using AppliedSystems.Messaging.Messages;
 
     public class EventAppendedEventArgs : EventArgs
     {

@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.Http.Bootstrapping
+namespace AppliedSystems.Infrastucture.Messaging.Http.Bootstrapping
 {
     using SystemDot.Ioc;
     using AppliedSystems.Messaging.Http.Receiving;

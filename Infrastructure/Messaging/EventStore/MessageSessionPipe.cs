@@ -1,9 +1,8 @@
-using System;
-using AppliedSystems.Core;
-using AppliedSystems.Messaging.Infrastructure;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
+    using AppliedSystems.Messaging.Infrastructure;
+    using Core;
+
     public class MessageSessionPipe : IMessagePipe
     {
         private readonly MessageSession session;

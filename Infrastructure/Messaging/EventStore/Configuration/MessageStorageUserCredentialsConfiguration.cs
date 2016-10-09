@@ -1,4 +1,4 @@
-﻿namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Configuration
+﻿namespace AppliedSystems.Infrastucture.Messaging.EventStore.Configuration
 {
     public class MessageStorageUserCredentialsConfiguration
     {

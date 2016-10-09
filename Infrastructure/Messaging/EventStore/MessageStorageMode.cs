@@ -1,7 +1,7 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
     using System.Diagnostics.CodeAnalysis;
-    using AppliedSystems.Core;
+    using Core;
 
     public class MessageStorageMode : Equatable<MessageStorageMode>
     {

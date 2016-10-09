@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using AppliedSystems.Collections;
-using AppliedSystems.Messaging.Messages;
-using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
+    using System;
+    using System.Collections.Generic;
+    using AppliedSystems.Messaging.Messages;
+    using Collections;
+    using EventSourcing;
+
     public class NonPersistentEventStore : IEventStore
     {
         public event EventHandler<EventAppendedEventArgs> EventAppended;

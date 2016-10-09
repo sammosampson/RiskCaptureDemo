@@ -1,14 +1,14 @@
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using AppliedSystems.Core;
-using AppliedSystems.Core.Diagnostics;
-using AppliedSystems.Messaging.Infrastructure;
-using EventStore.ClientAPI;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Writing
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Writing
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using AppliedSystems.Messaging.Infrastructure;
+    using Core;
+    using Core.Diagnostics;
+    using global::EventStore.ClientAPI;
+
     public class PersistentWriteEventStreamConnection : Disposable
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
@@ -33,13 +33,10 @@ namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Writing
                 toStore.Select(m => m.ToEventStoreEventData()).ToArray());
         }
         
-        public void Close()
-        {
-            connection.Close();
-        }
-
+        
         protected override void DisposeOfManagedResources()
         {
+            connection.Close();
             connection.Dispose();
             base.DisposeOfManagedResources();
         }

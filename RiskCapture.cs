@@ -1,6 +1,6 @@
 namespace AppliedSystems.RiskCapture.Service
 {
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing;
+    using Infrastucture.Messaging.EventSourcing;
 
     public class RiskCapture : AggregateRoot
     {

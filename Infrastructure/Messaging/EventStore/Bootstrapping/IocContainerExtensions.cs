@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Bootstrapping
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping
 {
     using SystemDot.Ioc;
     using Core;

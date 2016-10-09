@@ -1,11 +1,11 @@
-using System.Collections.ObjectModel;
-using AppliedSystems.Core;
-using AppliedSystems.Messaging.Infrastructure;
-using AppliedSystems.Messaging.Infrastructure.Headers;
-using EventStore.ClientAPI;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Reading
 {
+    using System.Collections.ObjectModel;
+    using AppliedSystems.Messaging.Infrastructure;
+    using AppliedSystems.Messaging.Infrastructure.Headers;
+    using Core;
+    using global::EventStore.ClientAPI;
+
     public static class ResolvedEventExtensions
     {
         public static Message ToMessage(this ResolvedEvent toConvert)

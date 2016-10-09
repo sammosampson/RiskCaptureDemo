@@ -1,14 +1,14 @@
-using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using AppliedSystems.Core;
-using AppliedSystems.Core.Diagnostics;
-using AppliedSystems.Messaging.Infrastructure;
-using AppliedSystems.Messaging.Infrastructure.Headers;
-using EventStore.ClientAPI;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Subscribing
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using AppliedSystems.Messaging.Infrastructure;
+    using AppliedSystems.Messaging.Infrastructure.Headers;
+    using Core;
+    using Core.Diagnostics;
+    using global::EventStore.ClientAPI;
+
     public class PersistentSubscribeEventStreamConnection : Disposable
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
@@ -36,11 +36,6 @@ namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Subscrib
                 credentials);
 
             return new PersistentEventStreamSubscription(subscription);
-        }
-
-        public void Close()
-        {
-            connection.Close();
         }
 
         private void OnSubscriptionDropped(EventStoreCatchUpSubscription subscription, SubscriptionDropReason dropReason, Exception exception)
@@ -71,6 +66,7 @@ namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Subscrib
 
         protected override void DisposeOfManagedResources()
         {
+            connection.Close();
             connection.Dispose();
             base.DisposeOfManagedResources();
         }

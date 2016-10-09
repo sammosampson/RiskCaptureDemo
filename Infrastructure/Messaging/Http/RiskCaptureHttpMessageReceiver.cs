@@ -1,16 +1,16 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.Http
+namespace AppliedSystems.Infrastucture.Messaging.Http
 {
     using System;
     using System.Diagnostics;
     using System.Net;
     using System.Threading.Tasks;
-    using AppliedSystems.Core;
-    using AppliedSystems.Core.Diagnostics;
     using AppliedSystems.Messaging.Http.Receiving;
     using AppliedSystems.Messaging.Infrastructure;
     using AppliedSystems.Messaging.Infrastructure.Pipelines;
     using AppliedSystems.Messaging.Infrastructure.Receiving;
     using AppliedSystems.Messaging.Infrastructure.Responses;
+    using Core;
+    using Core.Diagnostics;
     using Microsoft.Owin;
     using Microsoft.Owin.Hosting;
     using Owin;

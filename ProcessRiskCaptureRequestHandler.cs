@@ -1,7 +1,7 @@
 namespace AppliedSystems.RiskCapture.Service
 {
     using AppliedSystems.Messaging.Infrastructure.Commands;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing;
+    using Infrastucture.Messaging.EventSourcing;
 
     public class ProcessRiskCaptureRequestHandler : ICommandHandler<ProcessRiskCaptureRequest>
     {

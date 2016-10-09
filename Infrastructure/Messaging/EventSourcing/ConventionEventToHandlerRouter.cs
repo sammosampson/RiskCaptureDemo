@@ -1,10 +1,10 @@
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventSourcing
+namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using AppliedSystems.Collections;
+    using Collections;
 
     public class ConventionEventToHandlerRouter
     {

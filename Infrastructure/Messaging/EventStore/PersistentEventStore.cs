@@ -1,12 +1,12 @@
-﻿namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+﻿namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
     using System.Collections.Generic;
-    using System.Linq; 
-    using Collections;
-    using Core;
+    using System.Linq;
     using AppliedSystems.Messaging.Infrastructure;
     using AppliedSystems.Messaging.Infrastructure.Pipelines;
     using AppliedSystems.Messaging.Messages;
+    using Collections;
+    using Core;
     using EventSourcing;
     using Reading;
     using Writing;

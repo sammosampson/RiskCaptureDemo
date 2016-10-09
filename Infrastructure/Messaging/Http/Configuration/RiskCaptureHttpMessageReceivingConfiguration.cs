@@ -1,4 +1,4 @@
-﻿namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.Http.Configuration
+﻿namespace AppliedSystems.Infrastucture.Messaging.Http.Configuration
 {
     using AppliedSystems.Configuration;
 

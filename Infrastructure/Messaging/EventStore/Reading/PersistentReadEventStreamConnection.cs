@@ -1,13 +1,13 @@
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using AppliedSystems.Core;
-using AppliedSystems.Core.Diagnostics;
-using AppliedSystems.Messaging.Infrastructure;
-using EventStore.ClientAPI;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Reading
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Reading
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using AppliedSystems.Messaging.Infrastructure;
+    using Core;
+    using Core.Diagnostics;
+    using global::EventStore.ClientAPI;
+
     public class PersistentReadEventStreamConnection : Disposable
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();

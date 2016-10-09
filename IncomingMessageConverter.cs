@@ -2,7 +2,7 @@
 {
     using AppliedSystems.Core;
     using AppliedSystems.Messaging.Infrastructure;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.Http;
+    using Infrastucture.Messaging.Http;
 
     public class IncomingMessageConverter : IIncomingMessageConverter
     {

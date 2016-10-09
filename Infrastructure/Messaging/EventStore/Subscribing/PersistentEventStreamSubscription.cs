@@ -1,7 +1,7 @@
-using EventStore.ClientAPI;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Subscribing
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing
 {
+    using global::EventStore.ClientAPI;
+
     public class PersistentEventStreamSubscription
     {
         private readonly EventStoreStreamCatchUpSubscription inner;

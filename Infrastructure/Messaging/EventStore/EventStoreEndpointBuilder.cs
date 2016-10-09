@@ -1,9 +1,9 @@
 
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
     using System.Diagnostics;
-    using Core.Diagnostics;
     using AppliedSystems.Messaging.Infrastructure.Pipelines;
+    using Core.Diagnostics;
     using EventSourcing;
     using Reading;
     using Writing;

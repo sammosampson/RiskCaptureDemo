@@ -1,7 +1,7 @@
-﻿namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.Http
+﻿namespace AppliedSystems.Infrastucture.Messaging.Http
 {
-    using AppliedSystems.Core;
     using AppliedSystems.Messaging.Infrastructure;
+    using Core;
 
     public interface IIncomingMessageConverter
     {

@@ -1,7 +1,6 @@
-﻿namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+﻿namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
     using System;
-    using AppliedSystems.Messaging.Infrastructure.Events.Outgoing;
 
     public class EventStoreEndpoint : IEventStoreEndpoint
     {

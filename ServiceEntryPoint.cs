@@ -2,22 +2,20 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Security.Policy;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
-    using AppliedSystems.Core;
-    using AppliedSystems.Data.Bootstrapping;
-    using AppliedSystems.Messaging.Data.Bootstrapping;
-    using AppliedSystems.Messaging.Http.Receiving;
-    using AppliedSystems.Messaging.Infrastructure.Bootstrapping;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Bootstrapping;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Configuration;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.Http;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.Http.Bootstrapping;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.Http.Configuration;
-    using AppliedSystems.RiskCapture.Service.Bootstrapping;
+    using Core;
+    using Data.Bootstrapping;
+    using Messaging.Data.Bootstrapping;
+    using Messaging.Http.Receiving;
+    using Messaging.Infrastructure.Bootstrapping;
+    using Bootstrapping;
+    using Infrastucture.Messaging.EventStore;
+    using Infrastucture.Messaging.EventStore.Bootstrapping;
+    using Infrastucture.Messaging.EventStore.Configuration;
+    using Infrastucture.Messaging.Http;
+    using Infrastucture.Messaging.Http.Bootstrapping;
+    using Infrastucture.Messaging.Http.Configuration;
     using Topshelf;
 
     class ServiceEntryPoint

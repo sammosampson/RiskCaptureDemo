@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore
+﻿namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
+    using System;
+
     public interface IEventStoreEndpoint
     {
         Type EndpointBuilderType { get; }

@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
-
-namespace AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore.Writing
+namespace AppliedSystems.Infrastucture.Messaging.EventStore.Writing
 {
+    using System.Threading.Tasks;
+
     public class PersistentWriteEventStreamConnector 
     {
         private readonly EventStoreConnector connector;

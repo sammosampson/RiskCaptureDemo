@@ -6,7 +6,6 @@ namespace AppliedSystems.RiskCapture.Service
     using AppliedSystems.Core.Diagnostics;
     using AppliedSystems.Messaging.Infrastructure;
     using AppliedSystems.Messaging.Infrastructure.Receiving;
-    using AppliedSystems.RiskCapture.Infrastucture.Messaging.EventStore;
 
     public class RiskCaptureController
     {
