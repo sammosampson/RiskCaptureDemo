@@ -15,8 +15,8 @@ namespace AppliedSystems.RiskCapture
 
         public void Handle(ProcessRiskCaptureRequest message)
         {
-            var capture = repository.Get<RiskCapturer>(RiskCaptureId.Parse(2));
-            capture.ProcessRequest(message.Request);
+            var capture = repository.Get<RiskCaptureMap>(new RiskCaptureMapId());
+            capture.ExtractMapFromRequest(message.Request);
             repository.Save(capture);
         }
     }

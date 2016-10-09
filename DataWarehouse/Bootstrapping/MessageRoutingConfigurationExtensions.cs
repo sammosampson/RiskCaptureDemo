@@ -9,7 +9,9 @@ namespace AppliedSystems.DataWarehouse.Bootstrapping
         {
             return config
                 .Incoming.ForEvents
-                    .Handle<RiskCaptureProcessed>().With<RiskCaptureProcessedHandler>();
+                    .Handle<RiskCaptureProcessed>().With<RiskCaptureProcessedHandler>()
+                    .Handle<NewRiskProductLineMapped>().With<NewRiskProductLineMappedHandler>()
+                    .Handle<NewRiskSectionMapped>().With<NewRiskSectionMappedHandler>();
         }
     }
 }

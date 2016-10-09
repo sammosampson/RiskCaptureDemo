@@ -29,7 +29,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
             this.id = id;
         }
 
-        protected void Then<TEvent>(TEvent @event) where TEvent : IEvent
+        protected internal void Then<TEvent>(TEvent @event) where TEvent : IEvent
         {
             ReplayEvent(@event);
             StoreEvent(@event);

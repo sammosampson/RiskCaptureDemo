@@ -190,6 +190,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
+    <Compile Include="NewRiskProductLineMappedHandler.cs" />
+    <Compile Include="NewRiskSectionMappedHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataWareHouseController.cs" />
     <Compile Include="RiskCaptureProcessedHandler.cs" />

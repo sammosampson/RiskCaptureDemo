@@ -30,6 +30,10 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore
 
         public IEnumerator<Message> GetEnumerator()
         {
+            if (!inner.IsValueCreated)
+            {
+                inner.Value = new List<Message>();
+            }
             return inner.Value.GetEnumerator();
         }
 

@@ -178,6 +178,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messaging\EventSourcing\AggregateEntity.cs" />
     <Compile Include="Messaging\EventSourcing\AggregateRoot.cs" />
     <Compile Include="Messaging\EventSourcing\ConventionEventToHandlerRouter.cs" />
     <Compile Include="Messaging\EventSourcing\DomainRepository.cs" />
