@@ -25,7 +25,7 @@ namespace AppliedSystems.RiskCapture
             {
                 Then(new NewRiskProductLineMapped(code));
             }
-            productLines[code].ExtractMapFromRiskSection(body.PolMessage.InputPolData);
+            productLines[code].ExtractMapFromRisk(body.PolMessage.InputPolData);
         }
 
         public void Apply(NewRiskProductLineMapped @event)

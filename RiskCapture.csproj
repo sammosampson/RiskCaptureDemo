@@ -198,6 +198,7 @@
     <Compile Include="Bootstrapping\IocContainerExtensions.cs" />
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
     <Compile Include="ProcessRiskCaptureRequestHandler.cs" />
+    <Compile Include="ProductLineRiskCaptureSectionItemMap.cs" />
     <Compile Include="RiskCaptureMap.cs" />
     <Compile Include="ProductLineRiskCaptureMap.cs" />
     <Compile Include="RiskCaptureController.cs" />

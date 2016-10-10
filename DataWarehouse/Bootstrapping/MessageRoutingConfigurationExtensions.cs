@@ -11,7 +11,8 @@ namespace AppliedSystems.DataWarehouse.Bootstrapping
                 .Incoming.ForEvents
                     .Handle<RiskCaptureProcessed>().With<RiskCaptureProcessedHandler>()
                     .Handle<NewRiskProductLineMapped>().With<NewRiskProductLineMappedHandler>()
-                    .Handle<NewRiskSectionMapped>().With<NewRiskSectionMappedHandler>();
+                    .Handle<NewRiskSectionMapped>().With<NewRiskSectionMappedHandler>()
+                    .Handle<NewRiskItemMapped>().With<NewRiskItemMappedHandler>();
         }
     }
 }

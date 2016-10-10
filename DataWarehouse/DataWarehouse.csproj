@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
+    <Compile Include="NewRiskItemMappedHandler.cs" />
     <Compile Include="NewRiskProductLineMappedHandler.cs" />
     <Compile Include="NewRiskSectionMappedHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -198,7 +199,9 @@
     <Compile Include="ServiceEntryPoint.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\packages.config" />
   </ItemGroup>
   <ItemGroup>
