@@ -28,7 +28,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping
             WriteEventStreamConnection writeConnection = writeEventStreamConnector.Connect(endpoint.Url, endpoint.Credentials).Result;
             PersistentReadEventStreamConnection readConnection = readEventStreamConnector.Connect(endpoint.Url).Result;
         
-            return new PersistentEventStore(pipelineBuilder, writeConnection, readConnection);
+            return new EventStore(pipelineBuilder, writeConnection, readConnection);
         }
     }
 }

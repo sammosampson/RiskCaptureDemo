@@ -138,6 +138,7 @@
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
       <Private>True</Private>
@@ -199,9 +200,11 @@
     <Compile Include="Messaging\EventStore\MessageSessionPipe.cs" />
     <Compile Include="Messaging\EventStore\Bootstrapping\IEventStoreEndpoint.cs" />
     <Compile Include="Messaging\EventStore\Bootstrapping\IEventStoreEndpointBuilder.cs" />
-    <Compile Include="Messaging\EventStore\PersistentEventStore.cs" />
+    <Compile Include="Messaging\EventStore\EventStore.cs" />
     <Compile Include="Messaging\EventStore\ByteExtensions.cs" />
+    <Compile Include="Messaging\EventStore\Subscribing\EventIndexMessageHeader.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\EventStoreSubscriberReceiver.cs" />
+    <Compile Include="Messaging\EventStore\Subscribing\SubscrbedStreamIdMessageHeader.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\SubscribeEventStreamConnection.cs" />
     <Compile Include="Messaging\EventStore\Reading\ResolvedEventExtensions.cs" />
     <Compile Include="Messaging\EventStore\Reading\PersistentReadEventStreamConnection.cs" />

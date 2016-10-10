@@ -11,15 +11,14 @@
     using Reading;
     using Writing;
 
-    public class PersistentEventStore : IEventStore
+    public class EventStore : IEventStore
     {
         private readonly WriteEventStreamConnection writeConnection;
         private readonly PersistentReadEventStreamConnection readConnection;
         private readonly MessageSession currentMessageSession;
         private readonly MessagePipeline pipe;
 
-
-        public PersistentEventStore(MessagePipelineBuilder messagePipelineBuilder, WriteEventStreamConnection writeConnection, PersistentReadEventStreamConnection readConnection)
+        public EventStore(MessagePipelineBuilder messagePipelineBuilder, WriteEventStreamConnection writeConnection, PersistentReadEventStreamConnection readConnection)
         {
             this.writeConnection = writeConnection;
             this.readConnection = readConnection;
