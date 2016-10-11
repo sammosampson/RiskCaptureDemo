@@ -1,5 +1,8 @@
 namespace AppliedSystems.RiskCapture
 {
+    using System;
+    using AppliedSystems.RatingHub.Xml.Header;
+    using AppliedSystems.Xml;
     using Infrastucture.Messaging.EventSourcing;
     using Messages;
     using Messaging.Infrastructure.Commands;
@@ -15,8 +18,14 @@ namespace AppliedSystems.RiskCapture
 
         public void Handle(ProcessRiskCaptureRequest message)
         {
-            var capture = repository.Get<RiskCaptureMap>(new RiskCaptureMapId());
-            capture.ExtractMapFromRequest(message.Request);
+            var mapId = new RiskCaptureMapId();
+            var map = repository.Get<RiskCaptureMap>(mapId);
+            map.ExtractMapFromRequest(message.Request);
+            repository.Save(map);
+
+            var captureId = RiskCaptureId.Parse(message.Request.ToXDocument().GetHeader().SequenceId.Value);
+            var capture = repository.Get<RiskCapture>(captureId);
+            capture.ExtractCaptureFromRequest(captureId, message.Request, map);
             repository.Save(capture);
         }
     }

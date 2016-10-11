@@ -1,5 +1,6 @@
 namespace AppliedSystems.RiskCapture
 {
+    using System;
     using System.Collections.Generic;
     using Infrastucture.Messaging.EventSourcing;
     using Messages;
@@ -32,6 +33,14 @@ namespace AppliedSystems.RiskCapture
         {
             var code = ProductLineCode.Parse(@event.ProductLine);
             productLines[code] = new ProductLineRiskCaptureMap(this, code);
+        }
+
+        public void ExtractCaptureFromRequest(string request, Action<string, int, int, string> onValueExtraction)
+        {
+            RequestBodyElement body = request.ToXDocument().GetRequestBody();
+            ProductLineCode code = ProductLineCode.Parse(body.BusinessTransaction.ProductLineCode.Value);
+            productLines[code].ExtractCaptureFromRisk(body.PolMessage.InputPolData, onValueExtraction);
+
         }
     }
 }

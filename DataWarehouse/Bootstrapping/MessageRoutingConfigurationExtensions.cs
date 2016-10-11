@@ -1,5 +1,7 @@
 namespace AppliedSystems.DataWarehouse.Bootstrapping
 {
+    using AppliedSystems.Messaging.Infrastructure.Commands;
+    using AppliedSystems.RiskCapture;
     using Messaging.Infrastructure.Bootstrapping;
     using RiskCapture.Messages;
 
@@ -9,10 +11,20 @@ namespace AppliedSystems.DataWarehouse.Bootstrapping
         {
             return config
                 .Incoming.ForEvents
-                    .Handle<RiskCaptureProcessed>().With<RiskCaptureProcessedHandler>()
-                    .Handle<NewRiskProductLineMapped>().With<NewRiskProductLineMappedHandler>()
-                    .Handle<NewRiskSectionMapped>().With<NewRiskSectionMappedHandler>()
-                    .Handle<NewRiskItemMapped>().With<NewRiskItemMappedHandler>();
+                    .Handle<NewRiskProductLineMapped>()
+                        .ByStartingSaga<DataWarehouseSaga, DataWarehouseSagaState>(@event => @event.ProductLine)
+                        .WithInitialState((@event, state) => @event.ProductLine = state.ProductLine)
+                    .Handle<NewRiskSectionMapped>()
+                        .ByContinuingSagaFoundBy<DataWarehouseSaga, DataWarehouseSagaState>((@event, state) => @event.ProductLine)
+                    .Handle<NewRiskItemMapped>()
+                        .ByContinuingSagaFoundBy<DataWarehouseSaga, DataWarehouseSagaState>((@event, state) => @event.ProductLine)
+                    .Handle<RiskItemValueCaptured>()
+                        .ByContinuingSagaFoundBy<DataWarehouseSaga, DataWarehouseSagaState>((@event, state) => @event.ProductLine)
+               .Internal.ForCommands
+                    .Handle<CreateProductLineSchema>().With<CreateProductLineSchemaHandler>()
+                    .Handle<CreateRiskTable>().With<CreateRiskTableHandler>()
+                    .Handle<CreateRiskTableColumn>().With<CreateRiskTableColumnHandler>()
+                    .Handle<UpdateRiskTableColumnValue>().With<UpdateRiskTableColumnValueHandler>();
         }
     }
 }

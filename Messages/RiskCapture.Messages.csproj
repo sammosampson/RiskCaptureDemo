@@ -53,8 +53,7 @@
     <Compile Include="NewRiskSectionMapped.cs" />
     <Compile Include="ProcessRiskCaptureRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RiskCaptureProcessed.cs" />
-    <Compile Include="RiskItemCaptured.cs" />
+    <Compile Include="RiskItemValueCaptured.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,12 +1,11 @@
 namespace AppliedSystems.RiskCapture
 {
+    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Xml.Linq;
     using Infrastucture.Messaging.EventSourcing;
     using Messages;
     using Polaris;
-    using RatingHub.Xml.Attributes;
     using RatingHub.Xml.Body.PolMessage.PolData;
 
     public class ProductLineRiskCaptureMap : AggregateEntity<RiskCaptureMap>
@@ -34,40 +33,18 @@ namespace AppliedSystems.RiskCapture
             }
         }
 
-        public void Apply(NewRiskSectionMapped @event)
+        public void ExtractCaptureFromRisk(InputPolDataElement risk, Action<string, int, int, string> onValueExtraction)
         {
-            sections[@event.SectionName] = new ProductLineRiskCaptureSectionMap(Root, @event.RiskSectionId);
-            lastId = @event.RiskSectionId;
-        }
-    }
-
-    public class ProductLineRiskCaptureSectionMap : AggregateEntity<RiskCaptureMap>
-    {
-        private readonly Dictionary<string, ProductLineRiskCaptureSectionItemMap> items;
-        private readonly int riskSectionId;
-        private int lastId;
-
-        public ProductLineRiskCaptureSectionMap(RiskCaptureMap root, int riskSectionId) : base(root)
-        {
-            this.riskSectionId = riskSectionId;
-            items = new Dictionary<string, ProductLineRiskCaptureSectionItemMap>();
-        }
-
-        public void ExtractMapFromRiskSection(XElement sectionElement)
-        {
-            foreach (XElement riskItemElement in sectionElement.Elements())
+            foreach (XElement riskSectionElement in risk.InnerXElement.Elements())
             {
-                if (!items.ContainsKey(riskItemElement.Name.LocalName) && riskItemElement.Attributes().Any(e => e.Name.LocalName == ValAttribute.AttributeName))
-                {
-                    Then(new NewRiskItemMapped(++lastId, riskSectionId, riskItemElement.Name.LocalName));
-                }
+                sections[riskSectionElement.Name.LocalName].ExtractCaptureFromRiskSection(riskSectionElement, onValueExtraction);
             }
         }
 
-        public void Apply(NewRiskItemMapped @event)
+        public void Apply(NewRiskSectionMapped @event)
         {
-            items[@event.ItemName] = new ProductLineRiskCaptureSectionItemMap(Root);
-            lastId = @event.RiskItemId;
+            sections[@event.SectionName] = new ProductLineRiskCaptureSectionMap(Root, @event.RiskSectionId, @event.ProductLine);
+            lastId = @event.RiskSectionId;
         }
     }
 }

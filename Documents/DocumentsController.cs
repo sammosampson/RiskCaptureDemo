@@ -1,19 +1,19 @@
-namespace AppliedSystems.DataWarehouse
+namespace AppliedSystems.Documents
 {
     using System;
     using System.Diagnostics;
-    using Core;
-    using Core.Diagnostics;
-    using Messaging.Infrastructure;
-    using Messaging.Infrastructure.Receiving;
+    using AppliedSystems.Core;
+    using AppliedSystems.Core.Diagnostics;
+    using AppliedSystems.Messaging.Infrastructure;
+    using AppliedSystems.Messaging.Infrastructure.Receiving;
 
-    public class DataWarehouseController
+    public class DocumentsController
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
 
         private readonly IMessageReceiver receiver;
 
-        public DataWarehouseController(IMessageReceiver receiver)
+        public DocumentsController(IMessageReceiver receiver)
         {
             this.receiver = receiver;
         }
@@ -38,7 +38,7 @@ namespace AppliedSystems.DataWarehouse
 
         public void Stop()
         {
-            Trace.Information("Stopping the data warehouse service");
+            Trace.Information("Stopping the Documents service");
             MessageReceivingContext.Events.Unsubscribe("riskcaptures");
             receiver.StopReceiving();
         }

@@ -208,6 +208,7 @@
     <Compile Include="Messaging\EventStore\Subscribing\EventStoreSubscriberReceiver.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\IEventIndexStore.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\SqlEventIndexStore.cs" />
+    <Compile Include="Data\SqlRunner.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\SubscrbedStreamIdMessageHeader.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\SubscribeEventStreamConnection.cs" />
     <Compile Include="Messaging\EventStore\Reading\ResolvedEventExtensions.cs" />

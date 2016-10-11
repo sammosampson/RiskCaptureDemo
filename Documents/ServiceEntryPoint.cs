@@ -1,22 +1,19 @@
-﻿namespace AppliedSystems.DataWarehouse
+﻿namespace AppliedSystems.Documents
 {
     using System;
     using System.Diagnostics;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
+    using AppliedSystems.Core;
+    using AppliedSystems.Data.Bootstrapping;
     using AppliedSystems.Data.Connections;
+    using AppliedSystems.Documents.Bootstrapping;
     using AppliedSystems.Infrastucture.Data;
+    using AppliedSystems.Infrastucture.Messaging.EventStore;
+    using AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping;
+    using AppliedSystems.Infrastucture.Messaging.EventStore.Configuration;
     using AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing;
-    using AppliedSystems.Messaging.Infrastructure.Sagas.Bootstrapping;
-    using Bootstrapping;
-    using Core;
-    using Data.Bootstrapping;
-    using Messaging.Data.Bootstrapping;
-    using Messaging.Infrastructure.Bootstrapping;
-    using Infrastucture.Messaging.EventStore;
-    using Infrastucture.Messaging.EventStore.Bootstrapping;
-    using Infrastucture.Messaging.EventStore.Configuration;
-    using Messaging.Infrastructure.Commands;
+    using AppliedSystems.Messaging.Infrastructure.Bootstrapping;
     using Topshelf;
 
     class ServiceEntryPoint
@@ -29,9 +26,9 @@
                 .ListenTo(EventStoreUrl.Parse(config.Url))
                 .WithCredentials(
                     EventStoreUserCredentials.Parse(
-                        config.UserCredentials.User, 
+                        config.UserCredentials.User,
                         config.UserCredentials.Password));
-            
+
             HostFactory.Run(configurator =>
             {
                 var container = new IocContainer(t => t.NameInCSharp());
@@ -41,30 +38,28 @@
                     .RegisterBuildAction(c => c.RegisterInstance<IConnectionFactory, SqlConnectionFactory>())
                     .SetupData()
                     .SetupMessaging()
-                        .ConfigureSagas().WithInMemoryPersistence()
                         .ConfigureEventStoreSubscriber<SqlEventIndexStore>()
                         .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
                         .ConfigureMessageRouting().WireUpRouting()
                     .Initialise();
 
                 Trace.TraceInformation(
-                    "Data warehouse service has started up and the types registered into the container are {0}{1}",
+                    "Documents service has started up and the types registered into the container are {0}{1}",
                     Environment.NewLine,
                     container.Describe());
 
-                configurator.Service<DataWarehouseController>(s =>
+                configurator.Service<DocumentsController>(s =>
                 {
-                    s.ConstructUsing(name => container.Resolve<DataWarehouseController>());
+                    s.ConstructUsing(name => container.Resolve<DocumentsController>());
                     s.WhenStarted(c => c.Start());
                     s.WhenStopped(c => c.Stop());
                 });
 
                 configurator.RunAsLocalSystem();
-                configurator.SetDescription("Applied Systems Data Warehouse Service");
-                configurator.SetDisplayName("Applied Systems Data Warehouse Service");
-                configurator.SetServiceName("Applied Systems Data Warehouse Service");
+                configurator.SetDescription("Applied Systems Documents Service");
+                configurator.SetDisplayName("Applied Systems Documents Service");
+                configurator.SetServiceName("Applied Systems Documents Service");
             });
         }
-
     }
 }

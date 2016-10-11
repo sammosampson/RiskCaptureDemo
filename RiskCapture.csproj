@@ -199,6 +199,9 @@
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
     <Compile Include="ProcessRiskCaptureRequestHandler.cs" />
     <Compile Include="ProductLineRiskCaptureSectionItemMap.cs" />
+    <Compile Include="ProductLineRiskCaptureSectionMap.cs" />
+    <Compile Include="RiskCapture.cs" />
+    <Compile Include="RiskCaptureId.cs" />
     <Compile Include="RiskCaptureMap.cs" />
     <Compile Include="ProductLineRiskCaptureMap.cs" />
     <Compile Include="RiskCaptureController.cs" />

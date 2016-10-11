@@ -1,9 +1,7 @@
 namespace AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing
 {
-    using System;
-    using System.Data;
     using System.Globalization;
-    using AppliedSystems.Data.Connections;
+    using AppliedSystems.Infrastucture.Data;
 
     public class SqlEventIndexStore : IEventIndexStore
     {
@@ -27,57 +25,23 @@ ELSE
 
         const string EventIndexSelectSql = @"
 SELECT [EventIndex] FROM [EventIndexStore] WHERE [Stream] = '{0}'";
+        private readonly SqlRunner sqlRunner;
 
-        private readonly IConnectionFactory connectionFactory;
-
-        public SqlEventIndexStore(IConnectionFactory connectionFactory)
+        public SqlEventIndexStore(SqlRunner sqlRunner)
         {
-            this.connectionFactory = connectionFactory;
+            this.sqlRunner = sqlRunner;
         }
 
         public void Store(string stream, int index)
         {
-            ExecuteCommand(TableCreationSql);
-            ExecuteCommand(string.Format(CultureInfo.InvariantCulture, EventIndexUpsertSql, stream, index));
+            sqlRunner.ExecuteCommand(TableCreationSql);
+            sqlRunner.ExecuteCommand(string.Format(CultureInfo.InvariantCulture, EventIndexUpsertSql, stream, index));
         }
 
         public int? Get(string stream)
         {
-            ExecuteCommand(TableCreationSql);
-            return ExecuteReader(string.Format(CultureInfo.InvariantCulture, EventIndexSelectSql, stream), reader => reader.GetLastIndex());
-        }
-
-        private void ExecuteCommand(string commandText)
-        {
-            using (IDbConnection connection = connectionFactory.Create())
-            {
-                connection.Open();
-
-                using (IDbCommand command = CreateCommand(connection, commandText))
-                {
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private TReturnType ExecuteReader<TReturnType>(string commandText, Func<IDataReader, TReturnType> readerFunc)
-        {
-            using (IDbConnection connection = connectionFactory.Create())
-            {
-                connection.Open();
-
-                using (IDbCommand command = CreateCommand(connection, commandText))
-                {
-                    return readerFunc(command.ExecuteReader());
-                }
-            }
-        }
-
-        private IDbCommand CreateCommand(IDbConnection connection, string commandText)
-        {
-            IDbCommand command = connection.CreateCommand();
-            command.CommandText = commandText;
-            return command;
+            sqlRunner.ExecuteCommand(TableCreationSql);
+            return sqlRunner.ExecuteReader(string.Format(CultureInfo.InvariantCulture, EventIndexSelectSql, stream), reader => reader.GetLastIndex());
         }
     }
 }
