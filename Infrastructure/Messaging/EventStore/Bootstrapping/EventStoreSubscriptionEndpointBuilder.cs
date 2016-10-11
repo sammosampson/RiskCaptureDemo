@@ -9,20 +9,22 @@
     public class EventStoreSubscriptionEndpointBuilder : IReceivingEndpointBuilder<EventStoreSubscriptionEndpoint>
     {
         private readonly SubscribeEventStreamConnector connector;
+        private readonly IEventIndexStore eventIndexStore;
 
-        public EventStoreSubscriptionEndpointBuilder(SubscribeEventStreamConnector connector)
+        public EventStoreSubscriptionEndpointBuilder(SubscribeEventStreamConnector connector, IEventIndexStore eventIndexStore)
         {
             this.connector = connector;
+            this.eventIndexStore = eventIndexStore;
         }
 
         public IEnumerable<IMessageReceiver> BuildReceivers(EventStoreSubscriptionEndpoint endpoint, MessagePipeline pipeline)
         {
-            return new[] { new EventStoreSubscriberReceiver(pipeline, connector, endpoint.Credentials, endpoint.Url) };
+            return new[] { new EventStoreSubscriberReceiver(pipeline, connector, endpoint.Credentials, endpoint.Url, eventIndexStore) };
         }
 
         public IEnumerable<ISubscriptionClient> BuildSubscriptionClients(EventStoreSubscriptionEndpoint endpoint)
         {
-            return new[] { new EventStoreSubscritionClient() };
+            return new[] { new EventStoreSubscritionClient(eventIndexStore) };
         }
     }
 }

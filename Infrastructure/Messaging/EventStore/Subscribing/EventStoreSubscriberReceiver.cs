@@ -1,13 +1,10 @@
 namespace AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing
 {
-    using System.Data;
-    using System.Globalization;
     using System.Transactions;
     using AppliedSystems.Messaging.Infrastructure;
     using AppliedSystems.Messaging.Infrastructure.Pipelines;
     using AppliedSystems.Messaging.Infrastructure.Receiving;
     using Core;
-    using Data.Connections;
 
     public class EventStoreSubscriberReceiver : MessageReceiver
     {
@@ -52,42 +49,6 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing
         public override void StopReceiving()
         {
             SubscribeEventStreamConnectionContext.CurrentConnection.Close();
-        }
-    }
-
-    public interface IEventIndexStore
-    {
-        void Store(string stream, int index);
-    }
-
-    public class SqlEventIndexStore : IEventIndexStore
-    {
-        private IConnectionFactory connectionFactory;
-
-        public void Store(string stream, int index)
-        {
-            using (IDbConnection connection = connectionFactory.Create())
-            {
-                connection.Open();
-
-                using (IDbCommand command = CreateCommand(connection, stream, index))
-                {
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private IDbCommand CreateCommand(IDbConnection connection, string stream, int index)
-        {
-            IDbCommand command = connection.CreateCommand();
-
-            command.CommandText = string.Format(
-                CultureInfo.InvariantCulture,
-                "IF NOT EXISTS (SELECT * FROM dbo.EventIndex) INSERT INTO dbo.EventIndex(Stream, Index) VALUES('{0}', {1}) ELSE UPDATE dbo.EventIndex SET Stream = '{0}', Index = {1}",
-                stream,
-                index);
-
-            return command;
         }
     }
 }

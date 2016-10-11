@@ -179,6 +179,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\SqlConnectionFactory.cs" />
     <Compile Include="Messaging\EventSourcing\AggregateEntity.cs" />
     <Compile Include="Messaging\EventSourcing\AggregateRoot.cs" />
     <Compile Include="Messaging\EventSourcing\ConventionEventToHandlerRouter.cs" />
@@ -202,8 +203,11 @@
     <Compile Include="Messaging\EventStore\Bootstrapping\IEventStoreEndpointBuilder.cs" />
     <Compile Include="Messaging\EventStore\EventStore.cs" />
     <Compile Include="Messaging\EventStore\ByteExtensions.cs" />
+    <Compile Include="Messaging\EventStore\Subscribing\DataReaderExtensions.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\EventIndexMessageHeader.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\EventStoreSubscriberReceiver.cs" />
+    <Compile Include="Messaging\EventStore\Subscribing\IEventIndexStore.cs" />
+    <Compile Include="Messaging\EventStore\Subscribing\SqlEventIndexStore.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\SubscrbedStreamIdMessageHeader.cs" />
     <Compile Include="Messaging\EventStore\Subscribing\SubscribeEventStreamConnection.cs" />
     <Compile Include="Messaging\EventStore\Reading\ResolvedEventExtensions.cs" />

@@ -4,6 +4,9 @@
     using System.Diagnostics;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
+    using AppliedSystems.Data.Connections;
+    using AppliedSystems.Infrastucture.Data;
+    using AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing;
     using Bootstrapping;
     using Core;
     using Data.Bootstrapping;
@@ -34,8 +37,10 @@
 
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)
+                    .RegisterBuildAction(c => c.RegisterInstance<IConnectionFactory, SqlConnectionFactory>())
                     .SetupData()
                     .SetupMessaging()
+                        .ConfigureEventStoreSubscriber<SqlEventIndexStore>()
                         .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
                         .ConfigureMessageRouting().WireUpRouting()
                     .Initialise();
