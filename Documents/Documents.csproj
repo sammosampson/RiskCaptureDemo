@@ -41,6 +41,10 @@
       <HintPath>..\packages\AppliedSystems.Collections.1.0.113\lib\net\AppliedSystems.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AppliedSystems.Configuration, Version=1.0.57.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Configuration.1.0.57\lib\net\AppliedSystems.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="AppliedSystems.Core, Version=3.0.209.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AppliedSystems.Core.3.0.209\lib\net\AppliedSystems.Core.dll</HintPath>
       <Private>True</Private>
@@ -49,12 +53,24 @@
       <HintPath>..\packages\AppliedSystems.Data.2.1.167\lib\net\AppliedSystems.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.315\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.315\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.164.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.164\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Messaging.Messages, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
@@ -65,15 +81,64 @@
       <HintPath>..\packages\AppliedSystems.Security.1.0.2\lib\net\AppliedSystems.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.3.0.1\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Hosting.3.0.1\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nancy, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.1.4.1\lib\net40\Nancy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nancy.Owin, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.Owin.1.4.1\lib\net40\Nancy.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SignalR.Client.TypedHubProxy, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c6c1166b0a310e11, processorArchitecture=MSIL">
+      <HintPath>..\packages\SignalR.Client.TypedHubProxy.3.0.1\lib\net45\SignalR.Client.TypedHubProxy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\dotnet\System.Collections.Immutable.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
@@ -117,9 +182,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
+    <Compile Include="Configuration\DocumentsConfiguration.cs" />
+    <Compile Include="Configuration\DocumentsConfigurationException.cs" />
+    <Compile Include="Document.cs" />
     <Compile Include="DocumentsController.cs" />
+    <Compile Include="MergeFieldValueIntoDocumentHandler.cs" />
     <Compile Include="ServiceEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Template.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -133,6 +203,10 @@
     <ProjectReference Include="..\Messages\RiskCapture.Messages.csproj">
       <Project>{30006AE6-8522-493B-9E4D-AD5E288E9903}</Project>
       <Name>RiskCapture.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="Messages\Documents.Messages.csproj">
+      <Project>{BF8EC8B2-7477-4CC5-A0B7-10A3BD0A0221}</Project>
+      <Name>Documents.Messages</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

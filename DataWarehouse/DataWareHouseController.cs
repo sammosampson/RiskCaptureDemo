@@ -2,10 +2,10 @@ namespace AppliedSystems.DataWarehouse
 {
     using System;
     using System.Diagnostics;
-    using Core;
+    using AppliedSystems.Core;
+    using AppliedSystems.Messaging.Infrastructure;
+    using AppliedSystems.Messaging.Infrastructure.Receiving;
     using Core.Diagnostics;
-    using Messaging.Infrastructure;
-    using Messaging.Infrastructure.Receiving;
 
     public class DataWarehouseController
     {
@@ -38,7 +38,7 @@ namespace AppliedSystems.DataWarehouse
 
         public void Stop()
         {
-            Trace.Information("Stopping the data warehouse service");
+            Trace.Information("Stopping the Data warehouse service");
             MessageReceivingContext.Events.Unsubscribe("riskcaptures");
             receiver.StopReceiving();
         }

@@ -8,8 +8,9 @@ namespace AppliedSystems.RiskCapture.Bootstrapping
         public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config)
         {
             return config
-                .Incoming.ForCommands
-                    .Handle<ProcessRiskCaptureRequest>().With<ProcessRiskCaptureRequestHandler>();
+                .Internal
+                    .ForCommands.Handle<ProcessRiskCapture>().With<ProcessRiskCaptureHandler>()
+                    .ForRequests.Handle<GetRisk, GetRiskResponse>().With<GetRiskHandler>();
         }
     }
 }

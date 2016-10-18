@@ -1,4 +1,4 @@
-namespace AppliedSystems.DataWarehouse
+namespace AppliedSystems.DataWarehouse.Messages
 {
     using System;
     using AppliedSystems.Messaging.Messages;

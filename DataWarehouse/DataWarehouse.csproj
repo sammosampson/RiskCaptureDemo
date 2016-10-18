@@ -53,32 +53,28 @@
       <HintPath>..\packages\AppliedSystems.Data.2.1.167\lib\net\AppliedSystems.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.315\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.160.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.160\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.164.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.164\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.194.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.194\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.194.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.194\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.315\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Messaging.Messages, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AppliedSystems.Messaging.Messages.1.0.8\lib\net\AppliedSystems.Messaging.Messages.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AppliedSystems.Messaging.MSMQ, Version=2.1.511.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messages.MSMQ.2.1.511\lib\net\AppliedSystems.Messaging.MSMQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Polaris, Version=1.0.104.0, Culture=neutral, processorArchitecture=MSIL">
@@ -190,25 +186,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
-    <Compile Include="CreateProductLineSchema.cs" />
     <Compile Include="CreateProductLineSchemaHandler.cs" />
-    <Compile Include="CreateRiskTable.cs" />
-    <Compile Include="CreateRiskTableColumn.cs" />
     <Compile Include="CreateRiskTableColumnHandler.cs" />
     <Compile Include="CreateRiskTableHandler.cs" />
-    <Compile Include="DataWarehouseSaga.cs" />
-    <Compile Include="DataWarehouseSagaState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataWarehouseController.cs" />
+    <Compile Include="RiskCaptureSaga.cs" />
+    <Compile Include="RiskCaptureSagaRiskItemState.cs" />
+    <Compile Include="RiskCaptureSagaRiskSectionState.cs" />
+    <Compile Include="RiskCaptureSagaState.cs" />
     <Compile Include="ServiceEntryPoint.cs" />
-    <Compile Include="UpdateRiskTableColumnValue.cs" />
     <Compile Include="UpdateRiskTableColumnValueHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="..\packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastucture.csproj">
@@ -218,6 +212,10 @@
     <ProjectReference Include="..\Messages\RiskCapture.Messages.csproj">
       <Project>{30006AE6-8522-493B-9E4D-AD5E288E9903}</Project>
       <Name>RiskCapture.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="Messages\DataWarehouse.Messages.csproj">
+      <Project>{82E7D42C-8B30-48BD-B4D6-EF582B8A8914}</Project>
+      <Name>DataWarehouse.Messages</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

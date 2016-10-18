@@ -4,16 +4,13 @@
     using System.Diagnostics;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
+    using AppliedSystems.RiskCapture.Configuration;
     using Bootstrapping;
     using Core;
     using Data.Bootstrapping;
     using Infrastucture.Messaging.EventStore;
     using Infrastucture.Messaging.EventStore.Bootstrapping;
     using Infrastucture.Messaging.EventStore.Configuration;
-    using Infrastucture.Messaging.Http;
-    using Infrastucture.Messaging.Http.Bootstrapping;
-    using Infrastucture.Messaging.Http.Configuration;
-    using Messaging.Http.Receiving;
     using Messaging.Infrastructure.Bootstrapping;
     using Topshelf;
 
@@ -21,8 +18,7 @@
     {
         static void Main()
         {
-            var config = RiskCaptureHttpMessageReceivingConfiguration.FromAppConfig();
-            var receivePoint = RiskCaptureHttpReceivePoint.ListenOn(HttpMessagingReceiverUrl.Parse(config.Url));
+            var config = RiskCaptureConfiguration.FromAppConfig();
             var eventStorageConfig = EventStoreMessageStorageConfiguration.FromAppConfig();
 
             var eventStoreEndpoint = EventStoreEndpoint
@@ -41,8 +37,6 @@
                     .ConfigureRiskCapture()
                     .SetupData()
                     .SetupMessaging()
-                        .ConfigureHttpMessaging<IncomingMessageConverter>()    
-                        .ConfigureReceivingEndpoint(receivePoint)
                         .ConfigureEventStoreEndpoint(eventStoreEndpoint)
                         .ConfigureMessageRouting().WireUpRouting()
                     .Initialise();
@@ -54,7 +48,7 @@
 
                 configurator.Service<RiskCaptureController>(s =>
                 {
-                    s.ConstructUsing(name => container.Resolve<RiskCaptureController>());
+                    s.ConstructUsing(name => new RiskCaptureController(config.Url));
                     s.WhenStarted(c => c.Start());
                     s.WhenStopped(c => c.Stop());
                 });

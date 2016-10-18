@@ -10,20 +10,18 @@ namespace AppliedSystems.Documents
     public class DocumentsController
     {
         private static readonly TraceSource Trace = TraceSourceProvider.Provide();
+        private readonly IMessageReceiver messageReceiver;
 
-        private readonly IMessageReceiver receiver;
-
-        public DocumentsController(IMessageReceiver receiver)
+        public DocumentsController(IMessageReceiver messageReceiver)
         {
-            this.receiver = receiver;
+            this.messageReceiver = messageReceiver;
         }
 
         public void Start()
         {
-            receiver.StartReceiving(OnException);
-            MessageReceivingContext.Events.Subscribe("riskcaptures");
+            Trace.Information("Starting the Documents service");
+            messageReceiver.StartReceiving(OnException);
         }
-
         private void OnException(Exception exception, NotRequired<Message> message)
         {
             if (message.HasValue)
@@ -39,8 +37,7 @@ namespace AppliedSystems.Documents
         public void Stop()
         {
             Trace.Information("Stopping the Documents service");
-            MessageReceivingContext.Events.Unsubscribe("riskcaptures");
-            receiver.StopReceiving();
+            messageReceiver.StopReceiving();
         }
     }
 }

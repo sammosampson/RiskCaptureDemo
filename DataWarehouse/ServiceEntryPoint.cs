@@ -6,35 +6,33 @@
     using SystemDot.Ioc;
     using AppliedSystems.Data.Connections;
     using AppliedSystems.Infrastucture.Data;
+    using AppliedSystems.Infrastucture.Messaging.EventStore;
+    using AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping;
+    using AppliedSystems.Infrastucture.Messaging.EventStore.Configuration;
     using AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing;
     using AppliedSystems.Messaging.Infrastructure.Sagas.Bootstrapping;
     using Bootstrapping;
     using Core;
     using Data.Bootstrapping;
-    using Messaging.Data.Bootstrapping;
     using Messaging.Infrastructure.Bootstrapping;
-    using Infrastucture.Messaging.EventStore;
-    using Infrastucture.Messaging.EventStore.Bootstrapping;
-    using Infrastucture.Messaging.EventStore.Configuration;
-    using Messaging.Infrastructure.Commands;
     using Topshelf;
 
     class ServiceEntryPoint
     {
         static void Main()
         {
-            var config = EventStoreSubscriptionConfiguration.FromAppConfig();
-
-            var eventStoreSubscriptionEndpoint = EventStoreSubscriptionEndpoint
-                .ListenTo(EventStoreUrl.Parse(config.Url))
-                .WithCredentials(
-                    EventStoreUserCredentials.Parse(
-                        config.UserCredentials.User, 
-                        config.UserCredentials.Password));
-            
             HostFactory.Run(configurator =>
             {
                 var container = new IocContainer(t => t.NameInCSharp());
+
+                var eventSubscriptionConfig = EventStoreSubscriptionConfiguration.FromAppConfig();
+
+                var eventStoreSubscriptionEndpoint = EventStoreSubscriptionEndpoint
+                    .ListenTo(EventStoreUrl.Parse(eventSubscriptionConfig.Url))
+                    .WithCredentials(
+                        EventStoreUserCredentials.Parse(
+                            eventSubscriptionConfig.UserCredentials.User,
+                            eventSubscriptionConfig.UserCredentials.Password));
 
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)

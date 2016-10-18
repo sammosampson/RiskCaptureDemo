@@ -51,7 +51,7 @@
     <Compile Include="NewRiskItemMapped.cs" />
     <Compile Include="NewRiskProductLineMapped.cs" />
     <Compile Include="NewRiskSectionMapped.cs" />
-    <Compile Include="ProcessRiskCaptureRequest.cs" />
+    <Compile Include="ProcessRiskCapture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiskItemValueCaptured.cs" />
   </ItemGroup>

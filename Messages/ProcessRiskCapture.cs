@@ -2,11 +2,11 @@ namespace AppliedSystems.RiskCapture.Messages
 {
     using Messaging.Messages;
 
-    public class ProcessRiskCaptureRequest : ICommand
+    public class ProcessRiskCapture : ICommand
     {
         public string Request { get; }
 
-        public ProcessRiskCaptureRequest(string request)
+        public ProcessRiskCapture(string request)
         {
             Request = request;
         }

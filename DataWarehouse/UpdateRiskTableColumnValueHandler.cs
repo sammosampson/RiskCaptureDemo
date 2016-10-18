@@ -1,6 +1,7 @@
 namespace AppliedSystems.DataWarehouse
 {
     using System.Globalization;
+    using AppliedSystems.DataWarehouse.Messages;
     using AppliedSystems.Infrastucture.Data;
     using AppliedSystems.Messaging.Infrastructure.Commands;
 

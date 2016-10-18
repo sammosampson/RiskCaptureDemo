@@ -57,32 +57,28 @@
       <HintPath>packages\AppliedSystems.Data.2.1.167\lib\net\AppliedSystems.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\AppliedSystems.Messaging.3.0.315\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.160.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\AppliedSystems.Messaging.Http.1.1.160\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.164.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\AppliedSystems.Messaging.Http.1.1.164\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.194.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\AppliedSystems.Messaging.Http.Receiving.1.0.194\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.194.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\AppliedSystems.Messaging.Http.Receiving.1.0.194\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\AppliedSystems.Messaging.3.0.315\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Messaging.Messages, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\AppliedSystems.Messaging.Messages.1.0.8\lib\net\AppliedSystems.Messaging.Messages.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AppliedSystems.Messaging.MSMQ, Version=2.1.511.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\AppliedSystems.Messages.MSMQ.2.1.511\lib\net\AppliedSystems.Messaging.MSMQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Polaris, Version=1.0.104.0, Culture=neutral, processorArchitecture=MSIL">
@@ -123,6 +119,14 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Hosting, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Owin.Hosting.3.0.1\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nancy, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Nancy.1.4.3\lib\net40\Nancy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nancy.Owin, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Nancy.Owin.1.4.1\lib\net40\Nancy.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -194,10 +198,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapping\BuilderConfigurationExtensions.cs" />
-    <Compile Include="IncomingMessageConverter.cs" />
+    <Compile Include="Bootstrapping\RiskCaptureNancyBootstrapper.cs" />
+    <Compile Include="Bootstrapping\WebAppStartup.cs" />
+    <Compile Include="Configuration\RiskCaptureConfiguration.cs" />
+    <Compile Include="Configuration\RiskCaptureConfigurationException.cs" />
     <Compile Include="Bootstrapping\IocContainerExtensions.cs" />
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
-    <Compile Include="ProcessRiskCaptureRequestHandler.cs" />
+    <Compile Include="GetRisk.cs" />
+    <Compile Include="GetRiskHandler.cs" />
+    <Compile Include="GetRiskResponse.cs" />
+    <Compile Include="ProcessRiskCaptureHandler.cs" />
+    <Compile Include="ProcessRiskCaptureNancyModule.cs" />
     <Compile Include="ProductLineRiskCaptureSectionItemMap.cs" />
     <Compile Include="ProductLineRiskCaptureSectionMap.cs" />
     <Compile Include="RiskCapture.cs" />
@@ -211,7 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Infrastructure\Infrastucture.csproj">

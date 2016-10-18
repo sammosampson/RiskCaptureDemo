@@ -1,6 +1,9 @@
 ﻿namespace AppliedSystems.RiskCapture.Bootstrapping
 {
     using SystemDot.Bootstrapping;
+    using Nancy;
+    using Nancy.Owin;
+    using Owin;
 
     public static class BuilderConfigurationExtensions
     {

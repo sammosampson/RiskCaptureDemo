@@ -6,17 +6,18 @@ namespace AppliedSystems.RiskCapture
     using Infrastucture.Messaging.EventSourcing;
     using Messages;
     using Messaging.Infrastructure.Commands;
+    using Nancy.ModelBinding;
 
-    public class ProcessRiskCaptureRequestHandler : ICommandHandler<ProcessRiskCaptureRequest>
+    public class ProcessRiskCaptureHandler : ICommandHandler<ProcessRiskCapture>
     {
         private readonly DomainRepository repository;
 
-        public ProcessRiskCaptureRequestHandler(DomainRepository repository)
+        public ProcessRiskCaptureHandler(DomainRepository repository)
         {
             this.repository = repository;
         }
 
-        public void Handle(ProcessRiskCaptureRequest message)
+        public void Handle(ProcessRiskCapture message)
         {
             var mapId = new RiskCaptureMapId();
             var map = repository.Get<RiskCaptureMap>(mapId);

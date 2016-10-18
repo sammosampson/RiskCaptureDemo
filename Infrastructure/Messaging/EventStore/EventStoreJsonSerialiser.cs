@@ -4,13 +4,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore
 
     public static class EventStoreJsonSerialiser
     {
-        private static JsonSerializerSettings TypeNameHandlingSerializerSettings
-        {
-            get
-            {
-                return new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            }
-        }
+        private static JsonSerializerSettings TypeNameHandlingSerializerSettings => new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         public static string SerialiseToJson(object toSerialise)
         {
