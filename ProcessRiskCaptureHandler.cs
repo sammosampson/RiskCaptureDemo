@@ -1,6 +1,7 @@
 namespace AppliedSystems.RiskCapture
 {
     using System;
+    using AppliedSystems.Infrastucture;
     using AppliedSystems.RatingHub.Xml.Header;
     using AppliedSystems.Xml;
     using Infrastucture.Messaging.EventSourcing;
@@ -19,6 +20,8 @@ namespace AppliedSystems.RiskCapture
 
         public void Handle(ProcessRiskCapture message)
         {
+            GreenLogger.Log("Processing risk capture");
+
             var mapId = new RiskCaptureMapId();
             var map = repository.Get<RiskCaptureMap>(mapId);
             map.ExtractMapFromRequest(message.Request);

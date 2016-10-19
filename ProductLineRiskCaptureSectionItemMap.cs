@@ -3,6 +3,7 @@ namespace AppliedSystems.RiskCapture
     using System;
     using System.Linq;
     using System.Xml.Linq;
+    using AppliedSystems.Infrastucture;
     using AppliedSystems.RatingHub.Xml.Attributes;
     using Infrastucture.Messaging.EventSourcing;
 
@@ -22,6 +23,8 @@ namespace AppliedSystems.RiskCapture
 
         public void ExtractCaptureFromRiskItem(XElement riskItem, Action<string, int, int, string> onValueExtraction)
         {
+            GreenLogger.Log("Extracting capture from risk item for {0}", riskItem.Name.LocalName);
+
             onValueExtraction(
                 productLine, 
                 riskSectionId, 

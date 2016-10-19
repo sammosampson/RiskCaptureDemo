@@ -191,10 +191,10 @@
     <Compile Include="CreateRiskTableHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataWarehouseController.cs" />
-    <Compile Include="RiskCaptureSaga.cs" />
-    <Compile Include="RiskCaptureSagaRiskItemState.cs" />
-    <Compile Include="RiskCaptureSagaRiskSectionState.cs" />
-    <Compile Include="RiskCaptureSagaState.cs" />
+    <Compile Include="RiskCaptureProcess.cs" />
+    <Compile Include="RiskCaptureProcessRiskItemState.cs" />
+    <Compile Include="RiskCaptureProcessRiskSectionState.cs" />
+    <Compile Include="RiskCaptureProcessState.cs" />
     <Compile Include="ServiceEntryPoint.cs" />
     <Compile Include="UpdateRiskTableColumnValueHandler.cs" />
   </ItemGroup>

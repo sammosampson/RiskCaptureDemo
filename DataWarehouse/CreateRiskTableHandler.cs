@@ -2,6 +2,7 @@ namespace AppliedSystems.DataWarehouse
 {
     using System.Globalization;
     using AppliedSystems.DataWarehouse.Messages;
+    using AppliedSystems.Infrastucture;
     using AppliedSystems.Infrastucture.Data;
     using AppliedSystems.Messaging.Infrastructure.Commands;
 
@@ -16,6 +17,8 @@ namespace AppliedSystems.DataWarehouse
 
         public void Handle(CreateRiskTable message)
         {
+            GreenLogger.Log("Creating table {0}.{1}", message.Schema, message.Name);
+
             const string CreateTableSql = @"
 CREATE TABLE [{0}].[{1}](
 	[Id] [uniqueidentifier] NOT NULL,

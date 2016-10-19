@@ -3,6 +3,7 @@ namespace AppliedSystems.Infrastucture.Data
     using System;
     using System.Data;
     using AppliedSystems.Data.Connections;
+    using Microsoft.AspNet.SignalR.Client;
 
     public class SqlRunner
     {
@@ -13,30 +14,39 @@ namespace AppliedSystems.Infrastucture.Data
             this.connectionFactory = connectionFactory;
         }
 
-        public void ExecuteCommand(string commandText)
+        public void ExecuteConnectionAction(Action<IDbConnection> connectionAction)
         {
             using (IDbConnection connection = connectionFactory.Create())
             {
                 connection.Open();
+                connectionAction(connection);
+            }
+        }
 
+        public void ExecuteCommand(string commandText)
+        {
+            ExecuteConnectionAction(connection =>
+            {
                 using (IDbCommand command = CreateCommand(connection, commandText))
                 {
                     command.ExecuteNonQuery();
                 }
-            }
+            });
         }
 
         public TReturnType ExecuteReader<TReturnType>(string commandText, Func<IDataReader, TReturnType> readerFunc)
         {
-            using (IDbConnection connection = connectionFactory.Create())
-            {
-                connection.Open();
+            TReturnType returnValue = default(TReturnType);
 
+            ExecuteConnectionAction(connection =>
+            {
                 using (IDbCommand command = CreateCommand(connection, commandText))
                 {
-                    return readerFunc(command.ExecuteReader());
+                    returnValue =  readerFunc(command.ExecuteReader());
                 }
-            }
+            });
+
+            return returnValue;
         }
 
         private IDbCommand CreateCommand(IDbConnection connection, string commandText)

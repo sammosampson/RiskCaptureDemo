@@ -15,8 +15,8 @@
     using AppliedSystems.Infrastucture.Messaging.EventStore.Configuration;
     using AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing;
     using AppliedSystems.Infrastucture.Messaging.Http;
+    using AppliedSystems.Infrastucture.Messaging.Sagas;
     using AppliedSystems.Messaging.Infrastructure.Bootstrapping;
-    using AppliedSystems.Messaging.Infrastructure.Sagas.Bootstrapping;
     using Topshelf;
 
     class ServiceEntryPoint
@@ -45,7 +45,7 @@
                     .RegisterBuildAction(c => c.RegisterInstance<IConnectionFactory, SqlConnectionFactory>())
                     .SetupData()
                     .SetupMessaging()
-                        .ConfigureSagas().WithInMemoryPersistence()
+                        .ConfigureSagas().WithDatabasePersistence()
                         .ConfigureEventStoreSubscriber<SqlEventIndexStore>()
                         .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
                         .ConfigureCommandDispatchingEndpoint(documentsEndpoint)
@@ -65,9 +65,9 @@
                 });
 
                 configurator.RunAsLocalSystem();
-                configurator.SetDescription("Applied Systems Risk Capture Process Service");
-                configurator.SetDisplayName("Applied Systems Risk Capture Process Service");
-                configurator.SetServiceName("Applied Systems Risk Capture Process Service");
+                configurator.SetDescription("Applied Systems Documents Process Service");
+                configurator.SetDisplayName("Applied Systems Documents Process Service");
+                configurator.SetServiceName("Applied Systems Documents Process Service");
             });
         }
     }

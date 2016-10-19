@@ -12,14 +12,14 @@ namespace AppliedSystems.DataWarehouse.Bootstrapping
             return config
                 .Incoming.ForEvents
                     .Handle<NewRiskProductLineMapped>()
-                        .ByStartingSaga<RiskCaptureSaga, RiskCaptureSagaState>(@event => @event.ProductLine)
+                        .ByStartingSaga<RiskCaptureProcess, RiskCaptureProcessState>(@event => @event.ProductLine)
                         .WithInitialState((@event, state) => @event.ProductLine = state.ProductLine)
                     .Handle<NewRiskSectionMapped>()
-                        .ByContinuingSagaFoundBy<RiskCaptureSaga, RiskCaptureSagaState>((@event, state) => @event.ProductLine)
+                        .ByContinuingSagaFoundBy<RiskCaptureProcess, RiskCaptureProcessState>((@event, state) => @event.ProductLine)
                     .Handle<NewRiskItemMapped>()
-                        .ByContinuingSagaFoundBy<RiskCaptureSaga, RiskCaptureSagaState>((@event, state) => @event.ProductLine)
+                        .ByContinuingSagaFoundBy<RiskCaptureProcess, RiskCaptureProcessState>((@event, state) => @event.ProductLine)
                     .Handle<RiskItemValueCaptured>()
-                        .ByContinuingSagaFoundBy<RiskCaptureSaga, RiskCaptureSagaState>((@event, state) => @event.ProductLine)
+                        .ByContinuingSagaFoundBy<RiskCaptureProcess, RiskCaptureProcessState>((@event, state) => @event.ProductLine)
                 .Internal.ForCommands
                     .Handle<CreateProductLineSchema>().With<CreateProductLineSchemaHandler>()
                     .Handle<CreateRiskTable>().With<CreateRiskTableHandler>()

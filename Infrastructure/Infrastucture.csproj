@@ -94,6 +94,10 @@
       <HintPath>..\packages\AppliedSystems.Xml.2.0.99\lib\net\AppliedSystems.Xml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EventStore.ClientAPI, Version=3.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EventStore.Client.3.9.0\lib\net40\EventStore.ClientAPI.dll</HintPath>
       <Private>True</Private>
@@ -236,6 +240,8 @@
     <Compile Include="Messaging\Http\HttpCommandDispatchingEndpoint.cs" />
     <Compile Include="Messaging\Http\HttpCommandDispatchingEndpointBuilder.cs" />
     <Compile Include="Messaging\Http\HttpSendMessagePipe.cs" />
+    <Compile Include="Messaging\Sagas\DbSagaStateRepository.cs" />
+    <Compile Include="Messaging\Sagas\SagaPersistenceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

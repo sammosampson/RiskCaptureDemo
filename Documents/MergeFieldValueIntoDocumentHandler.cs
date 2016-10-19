@@ -4,16 +4,17 @@ namespace AppliedSystems.Documents
     using AppliedSystems.Collections;
     using AppliedSystems.Data.Connections;
     using AppliedSystems.Documents.Messages;
+    using AppliedSystems.Infrastucture.Data;
     using AppliedSystems.Messaging.Infrastructure.Commands;
     using Dapper;
 
     public class MergeFieldValueIntoDocumentHandler : ICommandHandler<MergeFieldValueIntoDocument>
     {
-        private readonly IConnectionFactory connectionFactory;
+        private readonly SqlRunner runner;
 
-        public MergeFieldValueIntoDocumentHandler(IConnectionFactory connectionFactory)
+        public MergeFieldValueIntoDocumentHandler(SqlRunner runner)
         {
-            this.connectionFactory = connectionFactory;
+            this.runner = runner;
         }
 
         public void Handle(MergeFieldValueIntoDocument message)
@@ -23,10 +24,8 @@ INSERT INTO [Document](DataCaptureId, Text)
 SELECT @DataCaptureId, [Text] FROM Template 
 WHERE NOT EXISTS(SELECT * FROM [Document] WHERE DataCaptureId = @DataCaptureId)";
 
-            using (IDbConnection connection = connectionFactory.Create())
+            runner.ExecuteConnectionAction(connection =>
             {
-                connection.Open();
-
                 connection.Execute(InsertSql, new { message.DataCaptureId });
 
                 var documents = connection
@@ -37,7 +36,7 @@ WHERE NOT EXISTS(SELECT * FROM [Document] WHERE DataCaptureId = @DataCaptureId)"
                     document.Merge(message.FieldName, message.FieldValue);
                     connection.Execute("UPDATE [Document] SET Text = @Text WHERE DataCaptureId = @DataCaptureId", document);
                 });
-            }
+            });
         }
     }
 }

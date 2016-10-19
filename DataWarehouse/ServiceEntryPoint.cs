@@ -10,7 +10,7 @@
     using AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping;
     using AppliedSystems.Infrastucture.Messaging.EventStore.Configuration;
     using AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing;
-    using AppliedSystems.Messaging.Infrastructure.Sagas.Bootstrapping;
+    using AppliedSystems.Infrastucture.Messaging.Sagas;
     using Bootstrapping;
     using Core;
     using Data.Bootstrapping;
@@ -39,7 +39,7 @@
                     .RegisterBuildAction(c => c.RegisterInstance<IConnectionFactory, SqlConnectionFactory>())
                     .SetupData()
                     .SetupMessaging()
-                        .ConfigureSagas().WithInMemoryPersistence()
+                        .ConfigureSagas().WithDatabasePersistence()
                         .ConfigureEventStoreSubscriber<SqlEventIndexStore>()
                         .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
                         .ConfigureMessageRouting().WireUpRouting()

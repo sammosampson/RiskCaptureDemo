@@ -1,6 +1,6 @@
 ﻿namespace AppliedSystems.DataWarehouse
 {
-    public class RiskCaptureSagaRiskItemState
+    public class RiskCaptureProcessRiskItemState
     {
         public int RiskItemId { get; set; }
         public string RiskItemName { get; set; }
