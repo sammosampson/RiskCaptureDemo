@@ -12,12 +12,12 @@ namespace AppliedSystems.Documents.Process.Bootstrapping
         {
             return config
                 .Incoming.ForEvents
-                    .Ignore<NewRiskProductLineMapped>()
                     .Ignore<NewRiskSectionMapped>()
                     .Ignore<NewRiskItemMapped>()
-                    .Handle<RiskItemValueCaptured>()
+                    .Handle<NewRiskProductLineMapped>()
                         .ByStartingSaga<DocumentMergeProcess, DocumentMergeProcessState>(@event => @event.ProductLine)
                         .WithInitialState((@event, state) => @event.ProductLine = state.ProductLine)
+                    .Handle<RiskItemValueCaptured>().ByContinuingSagaFoundBy<DocumentMergeProcess, DocumentMergeProcessState>((@event, state) => @event.ProductLine)
                 .Outgoing.ForCommands
                     .Send<MergeFieldValueIntoDocument>()
                     .ViaEndpoint(documentsEndpoint)
