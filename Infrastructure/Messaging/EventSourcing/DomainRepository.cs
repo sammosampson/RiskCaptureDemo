@@ -1,7 +1,9 @@
 namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using AppliedSystems.Core;
     using AppliedSystems.Messaging.Messages;
 
     public class DomainRepository
@@ -13,28 +15,30 @@ namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
             this.store = store;
         }
 
-        public bool Exists(string aggregateRootId)
-        {
-            return GetEvents(aggregateRootId).Any();
-        }
-
-        public TAggregateRoot Get<TAggregateRoot>(string aggregateRootId)
-            where TAggregateRoot : AggregateRoot, new()
+        public TAggregateRoot Get<TAggregateRoot>(AggregateId aggregateRootId)
+            where TAggregateRoot : IAggregateRoot, new()
         {
             var aggregateRoot = new TAggregateRoot();
-            aggregateRoot.Rehydrate(aggregateRootId, GetEvents(aggregateRootId));
+            aggregateRoot.Rehydrate(aggregateRootId, GetEvents(aggregateRootId.ConvertToStreamName()));
             return aggregateRoot;
-        }
-
-        public void Save<TAggregateRoot>(TAggregateRoot aggregateRoot)
-            where TAggregateRoot : AggregateRoot
-        {
-            store.StoreEvents(aggregateRoot.GetEventStreamId(), aggregateRoot.EventsAdded);
         }
 
         IEnumerable<IEvent> GetEvents(string aggregateRootId)
         {
-            return store.GetEvents(aggregateRootId).ToList();
+            return store.GetEvents(aggregateRootId).Select(m => m.Payload.As<IEvent>()).ToList();
+        }
+
+        public IDisposable StartUnitOfWork()
+        {
+            var eventSourcingUnitOfWork = EventSourcingUnitOfWork.Start();
+            eventSourcingUnitOfWork.OnEnding += EventSourcingUnitOfWork_OnEnding;
+            return eventSourcingUnitOfWork;
+        }
+
+        private void EventSourcingUnitOfWork_OnEnding(object sender, EventArgs e)
+        {
+            store.StoreEvents(EventSourcingUnitOfWork.GetCurrent().GetEventsAdded());
+            EventSourcingUnitOfWork.GetCurrent().OnEnding -= EventSourcingUnitOfWork_OnEnding;
         }
     }
 }

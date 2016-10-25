@@ -1,17 +1,17 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Messages
 {
     using System;
     using AppliedSystems.Messaging.Messages;
 
     public class RiskItemValueCaptured : IEvent
     {
-        public Guid RiskCaptureId { get; set; }
-        public string ProductLine { get; set; }
-        public int RiskSectionId { get; set; }
-        public int ItemId { get; set; }
-        public string Value { get; set; }
+        public Guid RiskCaptureId { get; }
+        public string ProductLine { get; }
+        public Guid RiskSectionId { get; }
+        public Guid ItemId { get;  }
+        public string Value { get; }
 
-        public RiskItemValueCaptured(Guid riskCaptureId, string productLine, int riskSectionId, int itemId, string value)
+        public RiskItemValueCaptured(Guid riskCaptureId, string productLine, Guid riskSectionId, Guid itemId, string value)
         {
             RiskCaptureId = riskCaptureId;
             ProductLine = productLine;

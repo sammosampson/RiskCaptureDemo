@@ -1,30 +1,33 @@
 namespace AppliedSystems.DataWarehouse.Bootstrapping
 {
-    using AppliedSystems.DataWarehouse.Messages;
-    using AppliedSystems.RiskCapture;
-    using AppliedSystems.RiskCapture.Messages;
+    using Messages;
+    using Messaging.Infrastructure.Requests.Outgoing.InProcess;
+    using RiskCapture.Messages;
     using Messaging.Infrastructure.Bootstrapping;
 
     public static class MessageRoutingConfigurationExtensions
     {
-        public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config)
+        public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config, IRequestDispatchingEndpoint riskCaptureRequestEndpoint)
         {
             return config
                 .Incoming.ForEvents
                     .Handle<NewRiskProductLineMapped>()
-                        .ByStartingSaga<RiskCaptureProcess, RiskCaptureProcessState>(@event => @event.ProductLine)
+                        .ByStartingSaga<DataWarehousingProcess, DataWarehousingProcessState>(@event => @event.ProductLine)
                         .WithInitialState((@event, state) => @event.ProductLine = state.ProductLine)
                     .Handle<NewRiskSectionMapped>()
-                        .ByContinuingSagaFoundBy<RiskCaptureProcess, RiskCaptureProcessState>((@event, state) => @event.ProductLine)
+                        .ByContinuingSagaFoundBy<DataWarehousingProcess, DataWarehousingProcessState>((@event, state) => @event.ProductLine)
                     .Handle<NewRiskItemMapped>()
-                        .ByContinuingSagaFoundBy<RiskCaptureProcess, RiskCaptureProcessState>((@event, state) => @event.ProductLine)
+                        .ByContinuingSagaFoundBy<DataWarehousingProcess, DataWarehousingProcessState>((@event, state) => @event.ProductLine)
                     .Handle<RiskItemValueCaptured>()
-                        .ByContinuingSagaFoundBy<RiskCaptureProcess, RiskCaptureProcessState>((@event, state) => @event.ProductLine)
+                        .ByContinuingSagaFoundBy<DataWarehousingProcess, DataWarehousingProcessState>((@event, state) => @event.ProductLine)
                 .Internal.ForCommands
                     .Handle<CreateProductLineSchema>().With<CreateProductLineSchemaHandler>()
                     .Handle<CreateRiskTable>().With<CreateRiskTableHandler>()
                     .Handle<CreateRiskTableColumn>().With<CreateRiskTableColumnHandler>()
-                    .Handle<UpdateRiskTableColumnValue>().With<UpdateRiskTableColumnValueHandler>();
+                    .Handle<UpdateRiskTableColumnValue>().With<UpdateRiskTableColumnValueHandler>()
+                .Outgoing.ForRequests
+                    .Handle<LookupRiskCaptureItemMapping, LookupRiskCaptureItemMappingResponse>()
+                    .ViaEndpoint(riskCaptureRequestEndpoint);
         }
     }
 }

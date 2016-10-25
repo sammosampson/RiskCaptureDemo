@@ -22,15 +22,16 @@ namespace AppliedSystems.RiskCapture
         {
             GreenLogger.Log("Processing risk capture");
 
-            var mapId = new RiskCaptureMapId();
-            var map = repository.Get<RiskCaptureMap>(mapId);
-            map.ExtractMapFromRequest(message.Request);
-            repository.Save(map);
+            using (repository.StartUnitOfWork())
+            {
+                var mapId = new RiskCaptureMapId();
+                var map = repository.Get<RiskCaptureMap>(mapId);
+                map.ExtractMapFromRequest(message.Request);
 
-            var captureId = RiskCaptureId.Parse(message.Request.ToXDocument().GetHeader().SequenceId.Value);
-            var capture = repository.Get<RiskCapture>(captureId);
-            capture.ExtractCaptureFromRequest(captureId, message.Request, map);
-            repository.Save(capture);
+                var captureId = RiskCaptureId.Parse(message.Request.ToXDocument().GetHeader().SequenceId.Value);
+                var capture = repository.Get<RiskCapture>(captureId);
+                capture.ExtractCaptureFromRequest(captureId, message.Request, map);
+            }
         }
     }
 }

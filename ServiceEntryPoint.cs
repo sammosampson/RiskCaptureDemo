@@ -2,8 +2,13 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Net.Http;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
+    using AppliedSystems.Messaging.Http.Receiving;
+    using AppliedSystems.Messaging.Http.Receiving.Bootstrapping;
+    using AppliedSystems.Messaging.Http.Receiving.Configuration;
+    using AppliedSystems.Messaging.Infrastructure.Receiving;
     using AppliedSystems.RiskCapture.Configuration;
     using Bootstrapping;
     using Core;
@@ -28,6 +33,10 @@
                         eventStorageConfig.UserCredentials.User,
                         eventStorageConfig.UserCredentials.Password));
 
+            var receiverConfig = HttpMessageReceivingConfiguration.FromAppConfig();
+
+            HttpReceivePoint receivingEndpoint = HttpReceivePoint.ListenOn(HttpMessagingReceiverUrl.Parse(receiverConfig.Url));
+
             HostFactory.Run(configurator =>
             {
                 var container = new IocContainer(t => t.NameInCSharp());
@@ -37,6 +46,8 @@
                     .ConfigureRiskCapture()
                     .SetupData()
                     .SetupMessaging()
+                        .SetupHttpMessageReceiving()
+                        .ConfigureReceivingEndpoint(receivingEndpoint)
                         .ConfigureEventStoreEndpoint(eventStoreEndpoint)
                         .ConfigureMessageRouting().WireUpRouting()
                     .Initialise();
@@ -48,7 +59,7 @@
 
                 configurator.Service<RiskCaptureController>(s =>
                 {
-                    s.ConstructUsing(name => new RiskCaptureController(config.Url));
+                    s.ConstructUsing(name => new RiskCaptureController(config.Url, container.Resolve<IMessageReceiver>()));
                     s.WhenStarted(c => c.Start());
                     s.WhenStopped(c => c.Stop());
                 });

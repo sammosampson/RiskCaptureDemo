@@ -3,7 +3,6 @@ namespace AppliedSystems.Infrastucture.Messaging.Http
     using AppliedSystems.Core;
     using AppliedSystems.Messaging.Http;
     using AppliedSystems.Messaging.Http.Serialisation;
-    using AppliedSystems.Messaging.Http.WebRequests;
     using AppliedSystems.Messaging.Infrastructure;
 
     public class HttpSendMessagePipe : IMessagePipe

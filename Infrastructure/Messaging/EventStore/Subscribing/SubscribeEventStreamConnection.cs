@@ -58,8 +58,8 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing
             Trace.Information("Event appeared on subscription {0}", subscription.StreamId);
 
             messageDeliverer.Invoke(Message
-                .Create(EventStoreJsonSerialiser.DeserialiseFromJson(@event.Event.Data.ToUtf8()))
-                .AddHeaders(EventStoreJsonSerialiser.DeserialiseFromJson(@event.Event.Metadata.ToUtf8()).As<Collection<MessageHeader>>())
+                .Create(EventStoreJsonSerialiser.DeserialiseObjectFromJson(@event.Event.Data.ToUtf8()))
+                .AddHeaders(EventStoreJsonSerialiser.DeserialiseObjectFromJson(@event.Event.Metadata.ToUtf8()).As<Collection<MessageHeader>>())
                 .AddHeader(new EventIndexMessageHeader(), @event.OriginalEventNumber.ToString())
                 .AddHeader(new SubscrbedStreamIdMessageHeader(), subscription.StreamId));
         }

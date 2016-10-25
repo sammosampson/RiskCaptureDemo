@@ -5,57 +5,18 @@ namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
     using AppliedSystems.Messaging.Messages;
     using Collections;
 
-    public abstract class AggregateRoot
+    public abstract class AggregateRoot<TState> : AggregateEntity<TState>, IAggregateRoot
+        where TState : AggregateState
     {
-        readonly ConventionEventToHandlerRouter eventRouter;
-        public EventHandler<EventSourceEventArgs> EventReplayed;
-        string id;
-
-        internal List<IEvent> EventsAdded { get; }
-
-        internal string GetEventStreamId()
+        protected AggregateRoot(TState state)
+            : base(state)
         {
-            return id;
         }
 
-        protected AggregateRoot()
+        public void Rehydrate(AggregateId toRehaydrateId, IEnumerable<IEvent> events)
         {
-            EventsAdded = new List<IEvent>();
-            eventRouter = new ConventionEventToHandlerRouter(this, "Apply");
-        }
-
-        protected AggregateRoot(string id) : this()
-        {
-            this.id = id;
-        }
-
-        protected internal void Then<TEvent>(TEvent @event) where TEvent : IEvent
-        {
-            ReplayEvent(@event);
-            StoreEvent(@event);
-        }
-
-        void StoreEvent(IEvent @event)
-        {
-            EventsAdded.Add(@event);
-        }
-
-        internal void Rehydrate(string toRehaydrateId, IEnumerable<IEvent> events)
-        {
-            id = toRehaydrateId;
-
-            events.ForEach(ReplayEvent);
-        }
-
-        void ReplayEvent(IEvent toReplay)
-        {
-            eventRouter.RouteEventToHandlers(toReplay);
-            OnEventReplayed(toReplay);
-        }
-
-        void OnEventReplayed(IEvent @event)
-        {
-            EventReplayed?.Invoke(this, new EventSourceEventArgs(@event));
+            State.Id = toRehaydrateId;
+            events.ForEach(EventSourcingUnitOfWork.GetCurrent().ReplayEvent);
         }
     }
 }

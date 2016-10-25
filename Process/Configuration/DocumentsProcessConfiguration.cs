@@ -8,7 +8,7 @@
         {
             var configuration = ConfigurationReader.Read<DocumentsProcessConfiguration>();
 
-            if (string.IsNullOrEmpty(configuration.DocumentsUrl))
+            if (string.IsNullOrEmpty(configuration.DocumentsUrl) || string.IsNullOrEmpty(configuration.RiskCaptureUrl))
             {
                 throw new DocumentsProcessConfigurationException();
             }
@@ -17,5 +17,6 @@
         }
 
         public string DocumentsUrl { get; set; }
+        public string RiskCaptureUrl { get; set; }
     }
 }

@@ -1,8 +1,9 @@
 namespace AppliedSystems.RiskCapture
 {
-    public class RiskCaptureMapId
+    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    public class RiskCaptureMapId : AggregateId
     {
-        public static implicit operator string(RiskCaptureMapId from)
+        public override string ConvertToStreamName()
         {
             return "riskcapture-riskcapturemap";
         }

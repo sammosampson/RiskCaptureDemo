@@ -186,15 +186,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
+    <Compile Include="Configuration\DataWarehousingConfiguration.cs" />
     <Compile Include="CreateProductLineSchemaHandler.cs" />
     <Compile Include="CreateRiskTableColumnHandler.cs" />
     <Compile Include="CreateRiskTableHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataWarehouseController.cs" />
-    <Compile Include="RiskCaptureProcess.cs" />
-    <Compile Include="RiskCaptureProcessRiskItemState.cs" />
-    <Compile Include="RiskCaptureProcessRiskSectionState.cs" />
-    <Compile Include="RiskCaptureProcessState.cs" />
+    <Compile Include="DataWarehousingProcess.cs" />
+    <Compile Include="DataWarehousingProcessState.cs" />
     <Compile Include="ServiceEntryPoint.cs" />
     <Compile Include="UpdateRiskTableColumnValueHandler.cs" />
   </ItemGroup>

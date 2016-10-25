@@ -1,58 +1,47 @@
 ﻿namespace AppliedSystems.DataWarehouse
 {
-    using System.Linq;
     using AppliedSystems.DataWarehouse.Messages;
     using AppliedSystems.Messaging.Infrastructure;
     using AppliedSystems.Messaging.Infrastructure.Sagas;
-    using AppliedSystems.RiskCapture;
     using AppliedSystems.RiskCapture.Messages;
 
-    public class RiskCaptureProcess : Saga<RiskCaptureProcessState>,
+    public class DataWarehousingProcess : Saga<DataWarehousingProcessState>,
         ISagaEventHandler<NewRiskItemMapped>,
         ISagaEventHandler<NewRiskProductLineMapped>,
         ISagaEventHandler<NewRiskSectionMapped>,
         ISagaEventHandler<RiskItemValueCaptured>
     {
-        public RiskCaptureProcess(MessageBus bus, ISagaStateRepository stateRepository)
+        public DataWarehousingProcess(MessageBus bus, ISagaStateRepository stateRepository)
             : base(bus, stateRepository)
         {
-            State = new RiskCaptureProcessState();
+            State = new DataWarehousingProcessState();
         }
         
         public void When(NewRiskProductLineMapped message)
         {
             Then(new CreateProductLineSchema(message.ProductLine));
-
         }
 
         public void When(NewRiskSectionMapped message)
         {
-            State.Sections.Add(new RiskCaptureProcessRiskSectionState { RiskSectionId = message.RiskSectionId, RiskSectionName = message.SectionName });
-
             Then(new CreateRiskTable(message.ProductLine, message.SectionName));
         }
 
         public void When(NewRiskItemMapped message)
         {
-            RiskCaptureProcessRiskSectionState section = State.Sections.Single(s => s.RiskSectionId == message.RiskSectionId);
-            section.Items.Add(new RiskCaptureProcessRiskItemState { RiskItemId = message.RiskItemId, RiskItemName = message.ItemName });
-
-            Then(new CreateRiskTableColumn(
-                State.ProductLine,
-                section.RiskSectionName,
-                message.ItemName));
+            Then(new CreateRiskTableColumn(State.ProductLine, message.SectionName, message.ItemName));
         }
 
         public void When(RiskItemValueCaptured message)
         {
-            RiskCaptureProcessRiskSectionState section = State.Sections.Single(s => s.RiskSectionId == message.RiskSectionId);
-            var itemName = section.Items.Single(i => i.RiskItemId == message.ItemId).RiskItemName;
+            var response = Then<LookupRiskCaptureItemMapping, LookupRiskCaptureItemMappingResponse>(
+                new LookupRiskCaptureItemMapping(message.ProductLine, message.ItemId));
             
             Then(new UpdateRiskTableColumnValue(
               State.ProductLine,
-              section.RiskSectionName,
+              response.SectionName,
               message.RiskCaptureId,
-              itemName,
+              response.ItemName,
               message.Value));
         }
     }

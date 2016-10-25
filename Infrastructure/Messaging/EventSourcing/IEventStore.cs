@@ -1,12 +1,12 @@
 namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
 {
     using System.Collections.Generic;
-    using AppliedSystems.Messaging.Messages;
+    using AppliedSystems.Messaging.Infrastructure;
 
     public interface IEventStore
     {
-        IEnumerable<IEvent> GetEvents(string streamId);
+        IEnumerable<Message> GetEvents(string streamId);
 
-        void StoreEvents(string streamId, IEnumerable<IEvent> toStore);
+        void StoreEvents(IEnumerable<Message> toStore);
     }
 }

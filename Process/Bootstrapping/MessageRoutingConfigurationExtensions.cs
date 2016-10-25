@@ -3,26 +3,27 @@ namespace AppliedSystems.Documents.Process.Bootstrapping
     using AppliedSystems.Documents.Messages;
     using AppliedSystems.Messaging.Infrastructure.Bootstrapping;
     using AppliedSystems.Messaging.Infrastructure.Commands.Outgoing;
-    using AppliedSystems.RiskCapture;
+    using AppliedSystems.Messaging.Infrastructure.Requests.Outgoing.InProcess;
     using AppliedSystems.RiskCapture.Messages;
 
     public static class MessageRoutingConfigurationExtensions
     {
-        public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config, ICommandDispatchingEndpoint documentsEndpoint)
+        public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config, ICommandDispatchingEndpoint documentsEndpoint, IRequestDispatchingEndpoint riskCaptureRequestEndpoint)
         {
             return config
                 .Incoming.ForEvents
-                    .Handle<NewRiskProductLineMapped>()
-                        .ByStartingSaga<RiskCaptureSaga, RiskCaptureSagaState>(@event => @event.ProductLine)
-                        .WithInitialState((@event, state) => @event.ProductLine = state.ProductLine)
-                    .Handle<NewRiskSectionMapped>()
-                        .ByContinuingSagaFoundBy<RiskCaptureSaga, RiskCaptureSagaState>((@event, state) => @event.ProductLine)
-                    .Handle<NewRiskItemMapped>()
-                        .ByContinuingSagaFoundBy<RiskCaptureSaga, RiskCaptureSagaState>((@event, state) => @event.ProductLine)
+                    .Ignore<NewRiskProductLineMapped>()
+                    .Ignore<NewRiskSectionMapped>()
+                    .Ignore<NewRiskItemMapped>()
                     .Handle<RiskItemValueCaptured>()
-                        .ByContinuingSagaFoundBy<RiskCaptureSaga, RiskCaptureSagaState>((@event, state) => @event.ProductLine)
+                        .ByStartingSaga<DocumentMergeProcess, DocumentMergeProcessState>(@event => @event.ProductLine)
+                        .WithInitialState((@event, state) => @event.ProductLine = state.ProductLine)
                 .Outgoing.ForCommands
-                    .Send<MergeFieldValueIntoDocument>().ViaEndpoint(documentsEndpoint);
+                    .Send<MergeFieldValueIntoDocument>()
+                    .ViaEndpoint(documentsEndpoint)
+                .Outgoing.ForRequests
+                    .Handle<LookupRiskCaptureItemMapping, LookupRiskCaptureItemMappingResponse>()
+                    .ViaEndpoint(riskCaptureRequestEndpoint);
         }
     }
 }

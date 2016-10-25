@@ -5,6 +5,8 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping
 
     public interface IEventStoreEndpointBuilder<in TEventStoreEndpoint> where TEventStoreEndpoint : IEventStoreEndpoint
     {
-        IEventStore Build(TEventStoreEndpoint endpoint, MessagePipelineBuilder pipelineBuilder);
+        IEventStore BuildEventStore(TEventStoreEndpoint endpoint, MessagePipelineBuilder pipelineBuilder);
+
+        IProjectionStore BuildProjectionStore(TEventStoreEndpoint endpoint);
     }
 }

@@ -1,17 +1,13 @@
 namespace AppliedSystems.RiskCapture
 {
     using System;
+    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
 
-    public class RiskCaptureId
+    public class RiskCaptureId : AggregateId
     {
         public static RiskCaptureId Parse(string sequenceId)
         {
             return new RiskCaptureId(sequenceId);
-        }
-
-        public static implicit operator string(RiskCaptureId from)
-        {
-            return "riskcapture-" + from.id;
         }
 
         public static implicit operator Guid(RiskCaptureId from)
@@ -24,6 +20,11 @@ namespace AppliedSystems.RiskCapture
         private RiskCaptureId(string id)
         {
             this.id = id;
+        }
+
+        public override string ConvertToStreamName()
+        {
+            return "riskcapture-" + id;
         }
     }
 }

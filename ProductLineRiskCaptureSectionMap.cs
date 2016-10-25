@@ -1,7 +1,6 @@
 namespace AppliedSystems.RiskCapture
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Xml.Linq;
     using AppliedSystems.Infrastucture;
@@ -9,18 +8,11 @@ namespace AppliedSystems.RiskCapture
     using AppliedSystems.RatingHub.Xml.Attributes;
     using AppliedSystems.RiskCapture.Messages;
 
-    public class ProductLineRiskCaptureSectionMap : AggregateEntity<RiskCaptureMap>
+    public class ProductLineRiskCaptureSectionMap : AggregateEntity<ProductLineRiskCaptureSectionMapState>
     {
-        private readonly Dictionary<string, ProductLineRiskCaptureSectionItemMap> items;
-        private readonly int riskSectionId;
-        private readonly string productLine;
-        private int lastItemId;
-
-        public ProductLineRiskCaptureSectionMap(RiskCaptureMap root, int riskSectionId, string productLine) : base(root)
+        public ProductLineRiskCaptureSectionMap(AggregateId id, Guid riskSectionId, string productLine) 
+            : base(new ProductLineRiskCaptureSectionMapState(id, riskSectionId, productLine))
         {
-            this.riskSectionId = riskSectionId;
-            this.productLine = productLine;
-            items = new Dictionary<string, ProductLineRiskCaptureSectionItemMap>();
         }
 
         public void ExtractMapFromRiskSection(XElement sectionElement)
@@ -29,36 +21,25 @@ namespace AppliedSystems.RiskCapture
 
             foreach (XElement riskItemElement in sectionElement.Elements())
             {
-                if (!items.ContainsKey(riskItemElement.Name.LocalName) && riskItemElement.Attributes().Any(e => e.Name.LocalName == ValAttribute.AttributeName))
+                if (!State.Items.ContainsKey(riskItemElement.Name.LocalName) && riskItemElement.Attributes().Any(e => e.Name.LocalName == ValAttribute.AttributeName))
                 {
-                    GreenLogger.Log("new risk item mapped for {0}", riskSectionId, riskItemElement.Name.LocalName);
-                    Then(new NewRiskItemMapped(++lastItemId, productLine, riskSectionId, riskItemElement.Name.LocalName));
+                    GreenLogger.Log("new risk item mapped for {0}", State.RiskSectionId, riskItemElement.Name.LocalName);
+
+                    Then(new NewRiskItemMapped(Guid.NewGuid(), State.ProductLine, State.RiskSectionId, sectionElement.Name.LocalName, riskItemElement.Name.LocalName));
                 }
             }
         }
-        public void ExtractCaptureFromRiskSection(XElement sectionElement, Action<string, int, int, string> onValueExtraction)
+        public void ExtractCaptureFromRiskSection(XElement sectionElement, Action<string, Guid, Guid, string> onValueExtraction)
         {
             GreenLogger.Log("Extracting capture from risk section for {0}", sectionElement.Name.LocalName);
 
             foreach (XElement riskItemElement in sectionElement.Elements())
             {
-                if (items.ContainsKey(riskItemElement.Name.LocalName) )
+                if (State.Items.ContainsKey(riskItemElement.Name.LocalName) )
                 {
-                    items[riskItemElement.Name.LocalName].ExtractCaptureFromRiskItem(riskItemElement, onValueExtraction);
+                    State.Items[riskItemElement.Name.LocalName].ExtractCaptureFromRiskItem(riskItemElement, onValueExtraction);
                 }
             }
         }
-
-        public void Apply(NewRiskItemMapped @event)
-        {
-            if (@event.ProductLine != productLine || @event.RiskSectionId != riskSectionId)
-            {
-                return;
-            }
-
-            items[@event.ItemName] = new ProductLineRiskCaptureSectionItemMap(Root, @event.ProductLine, @event.RiskSectionId, @event.RiskItemId);
-            lastItemId = @event.RiskItemId;
-        }
-
     }
 }

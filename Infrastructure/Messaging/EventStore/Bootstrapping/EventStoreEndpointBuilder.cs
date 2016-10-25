@@ -15,20 +15,30 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping
         private readonly WriteEventStreamConnector writeEventStreamConnector;
         private readonly PersistentReadEventStreamConnector readEventStreamConnector;
 
-        public EventStoreEndpointBuilder(WriteEventStreamConnector writeEventStreamConnector, PersistentReadEventStreamConnector readEventStreamConnector)
+        public EventStoreEndpointBuilder(
+            WriteEventStreamConnector writeEventStreamConnector, 
+            PersistentReadEventStreamConnector readEventStreamConnector)
         {
             this.writeEventStreamConnector = writeEventStreamConnector;
             this.readEventStreamConnector = readEventStreamConnector;
         }
 
-        public IEventStore Build(EventStoreEndpoint endpoint, MessagePipelineBuilder pipelineBuilder)
+        public IEventStore BuildEventStore(EventStoreEndpoint endpoint, MessagePipelineBuilder pipelineBuilder)
         {           
             Trace.Information("Opening the event stream writer connection");
 
             WriteEventStreamConnection writeConnection = writeEventStreamConnector.Connect(endpoint.Url, endpoint.Credentials).Result;
             PersistentReadEventStreamConnection readConnection = readEventStreamConnector.Connect(endpoint.Url).Result;
         
-            return new EventStore(pipelineBuilder, writeConnection, readConnection);
+            return new EventStore(
+                readConnection, 
+                pipelineBuilder.AddPipelineComponent(new MessageSessionPipe(writeConnection)).Build());
+        }
+
+        public IProjectionStore BuildProjectionStore(EventStoreEndpoint endpoint)
+        {
+            PersistentReadEventStreamConnection readConnection = readEventStreamConnector.Connect(endpoint.Url).Result;
+            return new ProjectionStore(readConnection);
         }
     }
 }

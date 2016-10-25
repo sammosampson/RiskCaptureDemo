@@ -16,7 +16,13 @@
         public static MessagingConfiguration ConfigureEventStoreEndpoint<TEventStoreEndpoint>(this MessagingConfiguration config, TEventStoreEndpoint toConfigure)
             where TEventStoreEndpoint : IEventStoreEndpoint
         {
-            config.RegisterBuildAction(c => c.RegisterInstance<IEventStore>(() => c.ResolveEventStoreEndpointBuilder(toConfigure).Build(toConfigure, c.GetEventSendingPipeline())));
+            config
+                .RegisterBuildAction(c =>
+                {
+                    var builder = c.ResolveEventStoreEndpointBuilder(toConfigure);
+                    c.RegisterInstance<IEventStore>(() => builder.BuildEventStore(toConfigure, c.GetEventSendingPipeline()));
+                    c.RegisterInstance<IProjectionStore>(() => builder.BuildProjectionStore(toConfigure));
+                });
             return config;
         }
     }

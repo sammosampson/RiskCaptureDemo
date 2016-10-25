@@ -17,6 +17,7 @@
     using AppliedSystems.Infrastucture.Messaging.Http;
     using AppliedSystems.Infrastucture.Messaging.Sagas;
     using AppliedSystems.Messaging.Infrastructure.Bootstrapping;
+    using AppliedSystems.Messaging.Infrastructure.Sagas.Bootstrapping;
     using Topshelf;
 
     class ServiceEntryPoint
@@ -25,6 +26,7 @@
         {
             DocumentsProcessConfiguration config = DocumentsProcessConfiguration.FromAppConfig();
             HttpCommandDispatchingEndpoint documentsEndpoint = HttpCommandDispatchingEndpoint.FromUrl(config.DocumentsUrl);
+            HttpRequestDispatcherEndpoint riskCaptureRequestEndpoint = HttpRequestDispatcherEndpoint.ForUrl(config.RiskCaptureUrl);
 
             var eventSubscriptionConfig = EventStoreSubscriptionConfiguration.FromAppConfig();
 
@@ -48,8 +50,9 @@
                         .ConfigureSagas().WithDatabasePersistence()
                         .ConfigureEventStoreSubscriber<SqlEventIndexStore>()
                         .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
+                        .ConfigureRequestDispatchingEndpoint(riskCaptureRequestEndpoint)
                         .ConfigureCommandDispatchingEndpoint(documentsEndpoint)
-                        .ConfigureMessageRouting().WireUpRouting(documentsEndpoint)
+                        .ConfigureMessageRouting().WireUpRouting(documentsEndpoint, riskCaptureRequestEndpoint)
                     .Initialise();
 
                 Trace.TraceInformation(

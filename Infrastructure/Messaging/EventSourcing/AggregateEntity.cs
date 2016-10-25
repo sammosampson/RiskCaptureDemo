@@ -1,28 +1,36 @@
 namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
 {
+    using System;
+    using System.Security.Policy;
     using AppliedSystems.Messaging.Messages;
 
-    public abstract class AggregateEntity<TRoot> where TRoot : AggregateRoot
+    public abstract class AggregateEntity<TState> where TState : AggregateState
     {
         readonly ConventionEventToHandlerRouter eventRouter;
-
-        public TRoot Root { get; }
-
-        protected AggregateEntity(TRoot root)
+        protected TState State { get; }
+        
+        protected AggregateEntity(TState state)
         {
-            Root = root;
-            Root.EventReplayed += OnAggregateRootEventAdded;
-            eventRouter = new ConventionEventToHandlerRouter(this, "Apply");
+            State = state;
+            EventSourcingUnitOfWork.GetCurrent().EventReplayed += UnitOfWorkEventReplayed;
+            EventSourcingUnitOfWork.GetCurrent().OnEnding += UnitOfWorkEnding;    
+            eventRouter = new ApplyMethodConventionEventToHandlerRouter(State);
+        }
+
+        private void UnitOfWorkEventReplayed(object sender, EventSourceEventArgs args)
+        {
+            eventRouter.RouteEventToHandlers(args.Event);
+        }
+
+        private void UnitOfWorkEnding(object sender, EventArgs eventArgs)
+        {
+            EventSourcingUnitOfWork.GetCurrent().EventReplayed -= UnitOfWorkEventReplayed;
+            EventSourcingUnitOfWork.GetCurrent().OnEnding -= UnitOfWorkEnding;
         }
 
         protected void Then<TEvent>(TEvent @event) where TEvent : IEvent
         {
-            Root.Then(@event);
-        }
-
-        void OnAggregateRootEventAdded(object sender, EventSourceEventArgs e)
-        {
-            eventRouter.RouteEventToHandlers(e.Event);
+            EventSourcingUnitOfWork.GetCurrent().AddEvent(State.Id.ConvertToStreamName(), @event);
         }
     }
 }

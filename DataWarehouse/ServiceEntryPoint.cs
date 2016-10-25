@@ -5,12 +5,20 @@
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
     using AppliedSystems.Data.Connections;
+    using AppliedSystems.DataWarehouse.Configuration;
     using AppliedSystems.Infrastucture.Data;
     using AppliedSystems.Infrastucture.Messaging.EventStore;
     using AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping;
     using AppliedSystems.Infrastucture.Messaging.EventStore.Configuration;
     using AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing;
+    using AppliedSystems.Infrastucture.Messaging.Http;
     using AppliedSystems.Infrastucture.Messaging.Sagas;
+    using AppliedSystems.Messaging.Http;
+    using AppliedSystems.Messaging.Infrastructure.Pipelines;
+    using AppliedSystems.Messaging.Infrastructure.Requests;
+    using AppliedSystems.Messaging.Infrastructure.Requests.Outgoing.InProcess;
+    using AppliedSystems.Messaging.Infrastructure.Sagas.Bootstrapping;
+    using AppliedSystems.Messaging.Messages;
     using Bootstrapping;
     using Core;
     using Data.Bootstrapping;
@@ -34,6 +42,8 @@
                             eventSubscriptionConfig.UserCredentials.User,
                             eventSubscriptionConfig.UserCredentials.Password));
 
+                var riskCaptureRequestEndpoint = HttpRequestDispatcherEndpoint.ForUrl(DataWarehousingConfiguration.FromAppConfig().RiskCaptureUrl);
+
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)
                     .RegisterBuildAction(c => c.RegisterInstance<IConnectionFactory, SqlConnectionFactory>())
@@ -42,7 +52,8 @@
                         .ConfigureSagas().WithDatabasePersistence()
                         .ConfigureEventStoreSubscriber<SqlEventIndexStore>()
                         .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
-                        .ConfigureMessageRouting().WireUpRouting()
+                        .ConfigureRequestDispatchingEndpoint(riskCaptureRequestEndpoint)
+                        .ConfigureMessageRouting().WireUpRouting(riskCaptureRequestEndpoint)
                     .Initialise();
 
                 Trace.TraceInformation(

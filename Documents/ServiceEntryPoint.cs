@@ -41,7 +41,9 @@
             {
                 var container = new IocContainer(t => t.NameInCSharp());
 
-                HttpReceivingEndpoint httpReceivingEndpoint = HttpReceivingEndpoint.FromUrl(DocumentsConfiguration.FromAppConfig().Url);
+                var config = DocumentsConfiguration.FromAppConfig();
+
+                HttpReceivingEndpoint httpReceivingEndpoint = HttpReceivingEndpoint.FromUrl(config.Url);
 
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)

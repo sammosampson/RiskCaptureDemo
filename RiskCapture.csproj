@@ -204,19 +204,23 @@
     <Compile Include="Configuration\RiskCaptureConfigurationException.cs" />
     <Compile Include="Bootstrapping\IocContainerExtensions.cs" />
     <Compile Include="Bootstrapping\MessageRoutingConfigurationExtensions.cs" />
-    <Compile Include="GetRisk.cs" />
-    <Compile Include="GetRiskHandler.cs" />
-    <Compile Include="GetRiskResponse.cs" />
+    <Compile Include="LookupRiskCaptureItemMappingHandler.cs" />
     <Compile Include="ProcessRiskCaptureHandler.cs" />
     <Compile Include="ProcessRiskCaptureNancyModule.cs" />
+    <Compile Include="ProductLineRiskCaptureMapState.cs" />
     <Compile Include="ProductLineRiskCaptureSectionItemMap.cs" />
+    <Compile Include="ProductLineRiskCaptureSectionItemMapState.cs" />
     <Compile Include="ProductLineRiskCaptureSectionMap.cs" />
+    <Compile Include="ProductLineRiskCaptureSectionMapState.cs" />
     <Compile Include="RiskCapture.cs" />
     <Compile Include="RiskCaptureId.cs" />
+    <Compile Include="RiskCaptureMapLookupId.cs" />
     <Compile Include="RiskCaptureMap.cs" />
     <Compile Include="ProductLineRiskCaptureMap.cs" />
     <Compile Include="RiskCaptureController.cs" />
     <Compile Include="RiskCaptureMapId.cs" />
+    <Compile Include="RiskCaptureMapState.cs" />
+    <Compile Include="RiskCaptureState.cs" />
     <Compile Include="ServiceEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

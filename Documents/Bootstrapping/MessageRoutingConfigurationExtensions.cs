@@ -1,6 +1,6 @@
 namespace AppliedSystems.Documents.Bootstrapping
 {
-    using AppliedSystems.Documents.Messages;
+    using Messages;
     using Messaging.Infrastructure.Bootstrapping;
 
     public static class MessageRoutingConfigurationExtensions

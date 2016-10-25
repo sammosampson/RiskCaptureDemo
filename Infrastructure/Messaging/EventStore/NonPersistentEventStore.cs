@@ -2,8 +2,8 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore
 {
     using System;
     using System.Collections.Generic;
+    using AppliedSystems.Messaging.Infrastructure;
     using AppliedSystems.Messaging.Messages;
-    using Collections;
     using EventSourcing;
 
     public class NonPersistentEventStore : IEventStore
@@ -15,14 +15,14 @@ namespace AppliedSystems.Infrastucture.Messaging.EventStore
             EventAppended?.Invoke(this, new EventAppendedEventArgs(streamId, toStore));
         }
 
-        public IEnumerable<IEvent> GetEvents(string streamId)
+        public IEnumerable<Message> GetEvents(string streamId)
         {
             throw new NotImplementedException();
         }
 
-        public void StoreEvents(string streamId, IEnumerable<IEvent> toStore)
+        public void StoreEvents(IEnumerable<Message> toStore)
         {
-            toStore.ForEach(message => OnEventAppended(streamId, message));
+            throw new NotImplementedException();
         }
     }
 }

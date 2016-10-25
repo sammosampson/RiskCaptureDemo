@@ -7,28 +7,22 @@ namespace AppliedSystems.RiskCapture
     using AppliedSystems.RatingHub.Xml.Attributes;
     using Infrastucture.Messaging.EventSourcing;
 
-    public class ProductLineRiskCaptureSectionItemMap : AggregateEntity<RiskCaptureMap>
+    public class ProductLineRiskCaptureSectionItemMap : AggregateEntity<ProductLineRiskCaptureSectionItemMapState>
     {
-        private readonly string productLine;
-        private readonly int riskSectionId;
-        private readonly int riskItemId;
 
-        public ProductLineRiskCaptureSectionItemMap(RiskCaptureMap root, string productLine, int riskSectionId, int riskItemId)
-            : base(root)
+        public ProductLineRiskCaptureSectionItemMap(AggregateId id, string productLine, Guid riskSectionId, Guid riskItemId)
+            : base(new ProductLineRiskCaptureSectionItemMapState(id, productLine, riskSectionId, riskItemId))
         {
-            this.productLine = productLine;
-            this.riskSectionId = riskSectionId;
-            this.riskItemId = riskItemId;
         }
 
-        public void ExtractCaptureFromRiskItem(XElement riskItem, Action<string, int, int, string> onValueExtraction)
+        public void ExtractCaptureFromRiskItem(XElement riskItem, Action<string, Guid, Guid, string> onValueExtraction)
         {
             GreenLogger.Log("Extracting capture from risk item for {0}", riskItem.Name.LocalName);
 
             onValueExtraction(
-                productLine, 
-                riskSectionId, 
-                riskItemId,
+                State.ProductLine,
+                State.RiskSectionId,
+                State.RiskItemId,
                 riskItem.Attributes().Single(e => e.Name.LocalName == ValAttribute.AttributeName).Value);
         }
     }
