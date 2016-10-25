@@ -17,3 +17,24 @@ fromCategory("riskcapture")
   });
   
 This will link events from all streams in the category of riskcapture to a stream called riskcaptures so that subscribers can get all events in this category in one subscription
+
+add another continuous emitting projection in eventstore called RiskCapture Lookup with the body:
+
+fromStream("riskcapture-riskcapturemap")
+.when( 
+{ 
+    newRiskItemMapped : function(s,e) 
+    {
+        emit(
+            "riskcaptureprojections-riskcapturemaplookup-" + e.body.ProductLine, 
+            "lookup", 
+            {
+                "itemId" : e.body.RiskItemId,
+                "sectionName" : e.body.SectionName,
+                "itemName" : e.body.ItemName
+            });
+    }
+});
+
+This will create a projection from the risk capture map stream that will allow the lookup of items by id.
+
