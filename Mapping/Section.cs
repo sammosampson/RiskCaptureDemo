@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Mapping
 {
     using System;
     using System.Linq;
@@ -8,10 +8,10 @@ namespace AppliedSystems.RiskCapture
     using AppliedSystems.RatingHub.Xml.Attributes;
     using AppliedSystems.RiskCapture.Messages;
 
-    public class ProductLineRiskCaptureSectionMap : AggregateEntity<ProductLineRiskCaptureSectionMapState>
+    public class Section : AggregateEntity<SectionState>
     {
-        public ProductLineRiskCaptureSectionMap(AggregateId id, Guid riskSectionId, string productLine) 
-            : base(new ProductLineRiskCaptureSectionMapState(id, riskSectionId, productLine))
+        public Section(AggregateId id, Guid riskSectionId, string productLine) 
+            : base(new SectionState(id, riskSectionId, productLine))
         {
         }
 

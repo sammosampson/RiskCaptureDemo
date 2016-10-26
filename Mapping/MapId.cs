@@ -1,7 +1,8 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Mapping
 {
     using AppliedSystems.Infrastucture.Messaging.EventSourcing;
-    public class RiskCaptureMapId : AggregateId
+
+    public class MapId : AggregateId
     {
         public override string ConvertToStreamName()
         {

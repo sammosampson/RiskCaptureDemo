@@ -1,5 +1,6 @@
 namespace AppliedSystems.RiskCapture.Bootstrapping
 {
+    using AppliedSystems.RiskCapture.Mapping;
     using Messages;
     using Messaging.Infrastructure.Bootstrapping;
 
@@ -9,7 +10,7 @@ namespace AppliedSystems.RiskCapture.Bootstrapping
         {
             return config
                 .Incoming
-                    .ForRequests.Handle<LookupRiskCaptureItemMapping, LookupRiskCaptureItemMappingResponse>().With<LookupRiskCaptureItemMappingHandler>()
+                    .ForRequests.Handle<LookupRiskCaptureItemMapping, LookupRiskCaptureItemMappingResponse>().With<LookupItemMappingHandler>()
                 .Internal
                     .ForCommands.Handle<ProcessRiskCapture>().With<ProcessRiskCaptureHandler>();
         }

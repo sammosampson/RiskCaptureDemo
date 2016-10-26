@@ -1,4 +1,4 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Values
 {
     using AppliedSystems.Infrastucture.Messaging.EventSourcing;
 

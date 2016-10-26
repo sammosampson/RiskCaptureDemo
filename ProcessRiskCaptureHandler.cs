@@ -3,6 +3,8 @@ namespace AppliedSystems.RiskCapture
     using System;
     using AppliedSystems.Infrastucture;
     using AppliedSystems.RatingHub.Xml.Header;
+    using AppliedSystems.RiskCapture.Mapping;
+    using AppliedSystems.RiskCapture.Values;
     using AppliedSystems.Xml;
     using Infrastucture.Messaging.EventSourcing;
     using Messages;
@@ -24,8 +26,8 @@ namespace AppliedSystems.RiskCapture
 
             using (repository.StartUnitOfWork())
             {
-                var mapId = new RiskCaptureMapId();
-                var map = repository.Get<RiskCaptureMap>(mapId);
+                var mapId = new MapId();
+                var map = repository.Get<Map>(mapId);
                 map.ExtractMapFromRequest(message.Request);
 
                 var captureId = RiskCaptureId.Parse(message.Request.ToXDocument().GetHeader().SequenceId.Value);

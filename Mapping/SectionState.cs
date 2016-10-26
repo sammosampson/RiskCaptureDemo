@@ -1,21 +1,21 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Mapping
 {
     using System;
     using System.Collections.Generic;
     using AppliedSystems.Infrastucture.Messaging.EventSourcing;
     using AppliedSystems.RiskCapture.Messages;
 
-    public class ProductLineRiskCaptureSectionMapState : AggregateState
+    public class SectionState : AggregateState
     {
-        public Dictionary<string, ProductLineRiskCaptureSectionItemMap> Items { get; }
+        public Dictionary<string, SectionItem> Items { get; }
         public Guid RiskSectionId { get; }
         public string ProductLine { get; }
 
-        public ProductLineRiskCaptureSectionMapState(AggregateId id, Guid riskSectionId, string productLine) : base(id)
+        public SectionState(AggregateId id, Guid riskSectionId, string productLine) : base(id)
         {
             RiskSectionId = riskSectionId;
             ProductLine = productLine;
-            Items = new Dictionary<string, ProductLineRiskCaptureSectionItemMap>();
+            Items = new Dictionary<string, SectionItem>();
 
         }
 
@@ -26,7 +26,7 @@ namespace AppliedSystems.RiskCapture
                 return;
             }
 
-            Items[@event.ItemName] = new ProductLineRiskCaptureSectionItemMap(Id, @event.ProductLine, @event.RiskSectionId, @event.RiskItemId);
+            Items[@event.ItemName] = new SectionItem(Id, @event.ProductLine, @event.RiskSectionId, @event.RiskItemId);
         }
     }
 }

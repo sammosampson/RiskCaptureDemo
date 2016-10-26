@@ -1,17 +1,17 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Mapping
 {
     using System;
     using System.Xml.Linq;
     using AppliedSystems.Infrastucture;
-    using Infrastucture.Messaging.EventSourcing;
-    using Messages;
-    using Polaris;
-    using RatingHub.Xml.Body.PolMessage.PolData;
+    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    using AppliedSystems.Polaris;
+    using AppliedSystems.RatingHub.Xml.Body.PolMessage.PolData;
+    using AppliedSystems.RiskCapture.Messages;
 
-    public class ProductLineRiskCaptureMap : AggregateEntity<ProductLineRiskCaptureMapState>
+    public class ProductLine : AggregateEntity<ProductLineState>
     {
-        public ProductLineRiskCaptureMap(AggregateId id, ProductLineCode productLine) 
-            : base(new ProductLineRiskCaptureMapState(id, productLine))
+        public ProductLine(AggregateId id, ProductLineCode productLine) 
+            : base(new ProductLineState(id, productLine))
         {
         }
 

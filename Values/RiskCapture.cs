@@ -1,6 +1,7 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Values
 {
     using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    using AppliedSystems.RiskCapture.Mapping;
     using AppliedSystems.RiskCapture.Messages;
 
     public class RiskCapture : AggregateRoot<RiskCaptureState>
@@ -9,7 +10,7 @@ namespace AppliedSystems.RiskCapture
         {
         }
 
-        public void ExtractCaptureFromRequest(RiskCaptureId id, string request, RiskCaptureMap map)
+        public void ExtractCaptureFromRequest(RiskCaptureId id, string request, Map map)
         {
             map.ExtractCaptureFromRequest(
                 request, 

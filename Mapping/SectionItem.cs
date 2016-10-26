@@ -1,17 +1,17 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Mapping
 {
     using System;
     using System.Linq;
     using System.Xml.Linq;
     using AppliedSystems.Infrastucture;
+    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
     using AppliedSystems.RatingHub.Xml.Attributes;
-    using Infrastucture.Messaging.EventSourcing;
 
-    public class ProductLineRiskCaptureSectionItemMap : AggregateEntity<ProductLineRiskCaptureSectionItemMapState>
+    public class SectionItem : AggregateEntity<SectionItemState>
     {
 
-        public ProductLineRiskCaptureSectionItemMap(AggregateId id, string productLine, Guid riskSectionId, Guid riskItemId)
-            : base(new ProductLineRiskCaptureSectionItemMapState(id, productLine, riskSectionId, riskItemId))
+        public SectionItem(AggregateId id, string productLine, Guid riskSectionId, Guid riskItemId)
+            : base(new SectionItemState(id, productLine, riskSectionId, riskItemId))
         {
         }
 

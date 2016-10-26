@@ -1,16 +1,16 @@
-namespace AppliedSystems.RiskCapture
+namespace AppliedSystems.RiskCapture.Mapping
 {
     using System;
     using AppliedSystems.Infrastucture;
-    using Infrastucture.Messaging.EventSourcing;
-    using Messages;
-    using Polaris;
-    using RatingHub.Xml.Body.Requests;
-    using Xml;
+    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    using AppliedSystems.Polaris;
+    using AppliedSystems.RatingHub.Xml.Body.Requests;
+    using AppliedSystems.RiskCapture.Messages;
+    using AppliedSystems.Xml;
 
-    public class RiskCaptureMap : AggregateRoot<RiskCaptureMapState>
+    public class Map : AggregateRoot<MapState>
     {
-        public RiskCaptureMap() : base(new RiskCaptureMapState())
+        public Map() : base(new MapState())
         {
         }
 
