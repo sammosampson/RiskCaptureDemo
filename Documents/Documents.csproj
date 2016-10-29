@@ -49,28 +49,28 @@
       <HintPath>..\packages\AppliedSystems.Core.3.0.209\lib\net\AppliedSystems.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Data, Version=2.1.167.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Data.2.1.167\lib\net\AppliedSystems.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Data, Version=2.1.171.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Data.2.1.171\lib\net\AppliedSystems.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.330.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.330\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.164.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.164\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.169.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.169\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.203.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.203\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.203.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.203\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.330.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.330\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Messaging.Messages, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
@@ -208,9 +208,6 @@
       <Project>{BF8EC8B2-7477-4CC5-A0B7-10A3BD0A0221}</Project>
       <Name>Documents.Messages</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="db.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

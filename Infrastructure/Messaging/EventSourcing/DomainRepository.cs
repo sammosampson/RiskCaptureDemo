@@ -4,6 +4,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
     using System.Collections.Generic;
     using System.Linq;
     using AppliedSystems.Core;
+    using AppliedSystems.Messaging.Infrastructure.Events.Streams;
     using AppliedSystems.Messaging.Messages;
 
     public class DomainRepository

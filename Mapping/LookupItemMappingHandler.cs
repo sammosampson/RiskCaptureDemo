@@ -2,6 +2,7 @@ namespace AppliedSystems.RiskCapture.Mapping
 {
     using System.Linq;
     using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    using AppliedSystems.Messaging.Infrastructure.Events.Streams;
     using AppliedSystems.Messaging.Infrastructure.Requests;
     using AppliedSystems.RiskCapture.Messages;
 

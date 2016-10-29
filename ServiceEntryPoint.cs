@@ -5,6 +5,9 @@
     using System.Net.Http;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
+    using AppliedSystems.Messaging.EventStore;
+    using AppliedSystems.Messaging.EventStore.Bootstrapping;
+    using AppliedSystems.Messaging.EventStore.Configuration;
     using AppliedSystems.Messaging.Http.Receiving;
     using AppliedSystems.Messaging.Http.Receiving.Bootstrapping;
     using AppliedSystems.Messaging.Http.Receiving.Configuration;
@@ -13,9 +16,6 @@
     using Bootstrapping;
     using Core;
     using Data.Bootstrapping;
-    using Infrastucture.Messaging.EventStore;
-    using Infrastucture.Messaging.EventStore.Bootstrapping;
-    using Infrastucture.Messaging.EventStore.Configuration;
     using Messaging.Infrastructure.Bootstrapping;
     using Topshelf;
 
@@ -44,7 +44,6 @@
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)
                     .ConfigureRiskCapture()
-                    .SetupData()
                     .SetupMessaging()
                         .SetupHttpMessageReceiving()
                         .ConfigureReceivingEndpoint(receivingEndpoint)

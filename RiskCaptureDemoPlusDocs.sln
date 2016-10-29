@@ -20,8 +20,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documents.Messages", "Documents\Messages\Documents.Messages.csproj", "{BF8EC8B2-7477-4CC5-A0B7-10A3BD0A0221}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataWarehousing", "DataWarehousing", "{172256E9-4065-44F8-9C26-A2502ADA4853}"
+	ProjectSection(SolutionItems) = preProject
+		DataWarehouseDB.sql = DataWarehouseDB.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentMerging", "DocumentMerging", "{8B89FB61-FF78-4C30-A772-0EB633616559}"
+	ProjectSection(SolutionItems) = preProject
+		DocumentsDB.sql = DocumentsDB.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RiskCapturing", "RiskCapturing", "{CAA02435-5025-407F-911C-7E98147FB863}"
 EndProject

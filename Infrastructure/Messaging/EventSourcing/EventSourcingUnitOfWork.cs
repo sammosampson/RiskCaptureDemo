@@ -5,6 +5,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
     using System.Threading;
     using AppliedSystems.Core;
     using AppliedSystems.Messaging.Infrastructure;
+    using AppliedSystems.Messaging.Infrastructure.Events.Streams;
     using AppliedSystems.Messaging.Messages;
 
     public class EventSourcingUnitOfWork : Disposable
@@ -36,7 +37,7 @@ namespace AppliedSystems.Infrastucture.Messaging.EventSourcing
         public void AddEvent(string aggregateRootId, IEvent toAdd)
         {
             ReplayEvent(toAdd);
-            eventsAdded.Add(Message.Create(toAdd).AddHeader(new EventSourcedAggregateIdMessageHeader(), aggregateRootId));
+            eventsAdded.Add(Message.Create(toAdd).AddHeader(new EventStreamIdMessageHeaderKey(), aggregateRootId));
         }
 
         public IEnumerable<Message> GetEventsAdded()

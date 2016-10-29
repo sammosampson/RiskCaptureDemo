@@ -6,18 +6,14 @@
     using SystemDot.Ioc;
     using AppliedSystems.Core;
     using AppliedSystems.Data.Bootstrapping;
-    using AppliedSystems.Data.Connections;
     using AppliedSystems.Documents.Process.Bootstrapping;
     using AppliedSystems.Documents.Process.Configuration;
-    using AppliedSystems.Infrastucture.Data;
-    using AppliedSystems.Infrastucture.Messaging.EventStore;
-    using AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping;
-    using AppliedSystems.Infrastucture.Messaging.EventStore.Configuration;
-    using AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing;
     using AppliedSystems.Infrastucture.Messaging.Http;
-    using AppliedSystems.Infrastucture.Messaging.Sagas;
+    using AppliedSystems.Messaging.Data.Bootstrapping;
+    using AppliedSystems.Messaging.EventStore;
+    using AppliedSystems.Messaging.EventStore.Bootstrapping;
+    using AppliedSystems.Messaging.EventStore.Configuration;
     using AppliedSystems.Messaging.Infrastructure.Bootstrapping;
-    using AppliedSystems.Messaging.Infrastructure.Sagas.Bootstrapping;
     using Topshelf;
 
     class ServiceEntryPoint
@@ -44,11 +40,10 @@
 
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)
-                    .RegisterBuildAction(c => c.RegisterInstance<IConnectionFactory, SqlConnectionFactory>())
-                    .SetupData()
+                    .SetupDataConnectivity().WithSqlConnection()
                     .SetupMessaging()
                         .ConfigureSagas().WithDatabasePersistence()
-                        .ConfigureEventStoreSubscriber<SqlEventIndexStore>()
+                        .ConfigureSubscriptions().WithDatabasePersistence()
                         .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
                         .ConfigureRequestDispatchingEndpoint(riskCaptureRequestEndpoint)
                         .ConfigureCommandDispatchingEndpoint(documentsEndpoint)

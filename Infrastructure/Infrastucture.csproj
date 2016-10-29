@@ -50,28 +50,32 @@
       <HintPath>..\packages\AppliedSystems.Core.3.0.209\lib\net\AppliedSystems.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Data, Version=2.1.167.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Data.2.1.167\lib\net\AppliedSystems.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Data, Version=2.1.171.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Data.2.1.171\lib\net\AppliedSystems.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.330.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.330\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.164.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.164\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.EventStore, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.EventStore.1.0.7\lib\net\AppliedSystems.Messaging.EventStore.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.168.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.168\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.201.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.201\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.201.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.201\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.330.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.330\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Messaging.Messages, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
@@ -98,8 +102,8 @@
       <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EventStore.ClientAPI, Version=3.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EventStore.Client.3.9.0\lib\net40\EventStore.ClientAPI.dll</HintPath>
+    <Reference Include="EventStore.ClientAPI, Version=3.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventStore.Client.3.9.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -183,7 +187,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\SqlConnectionFactory.cs" />
     <Compile Include="GreenLogger.cs" />
     <Compile Include="Messaging\EventSourcing\AggregateEntity.cs" />
     <Compile Include="Messaging\EventSourcing\AggregateId.cs" />
@@ -192,57 +195,11 @@
     <Compile Include="Messaging\EventSourcing\ApplyMethodConventionEventToHandlerRouter.cs" />
     <Compile Include="Messaging\EventSourcing\ConventionEventToHandlerRouter.cs" />
     <Compile Include="Messaging\EventSourcing\DomainRepository.cs" />
-    <Compile Include="Messaging\EventSourcing\EventSourcedAggregateIdMessageHeader.cs" />
     <Compile Include="Messaging\EventSourcing\EventSourceEventArgs.cs" />
     <Compile Include="Messaging\EventSourcing\EventSourcingUnitOfWork.cs" />
     <Compile Include="Messaging\EventSourcing\IAggregateRoot.cs" />
-    <Compile Include="Messaging\EventSourcing\IEventStore.cs" />
-    <Compile Include="Messaging\EventSourcing\IProjectionStore.cs" />
     <Compile Include="Messaging\EventSourcing\SourcedEventHandler.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\EventStoreSubscriptionEndpoint.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\EventStoreSubscriptionEndpointBuilder.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\EventStoreSubscritionClient.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\MessagingConfigurationExtensions.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\EventStoreEndpointHasInvalidBuilderException.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\IocContainerExtensions.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\EventStoreEndpoint.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\EventStoreEndpointBuilder.cs" />
-    <Compile Include="Messaging\EventStore\Configuration\EventStoreSubscriptionConfiguration.cs" />
-    <Compile Include="Messaging\EventStore\Configuration\EventStorSubscriptionConfigurationException.cs" />
-    <Compile Include="Messaging\EventStore\MessageSessionPipe.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\IEventStoreEndpoint.cs" />
-    <Compile Include="Messaging\EventStore\Bootstrapping\IEventStoreEndpointBuilder.cs" />
-    <Compile Include="Messaging\EventStore\EventStore.cs" />
-    <Compile Include="Messaging\EventStore\ByteExtensions.cs" />
-    <Compile Include="Messaging\EventStore\ProjectionStore.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\DataReaderExtensions.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\EventIndexMessageHeader.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\EventStoreSubscriberReceiver.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\IEventIndexStore.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\SqlEventIndexStore.cs" />
     <Compile Include="Data\SqlRunner.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\SubscrbedStreamIdMessageHeader.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\SubscribeEventStreamConnection.cs" />
-    <Compile Include="Messaging\EventStore\Reading\ResolvedEventExtensions.cs" />
-    <Compile Include="Messaging\EventStore\Reading\PersistentReadEventStreamConnection.cs" />
-    <Compile Include="Messaging\EventStore\Reading\PersistentReadEventStreamConnector.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\EventStreamSubscription.cs" />
-    <Compile Include="Messaging\EventStore\StringExtensions.cs" />
-    <Compile Include="Messaging\EventStore\Configuration\EventStoreUserCredentialsConfiguration.cs" />
-    <Compile Include="Messaging\EventStore\Configuration\EventStoreMessageStorageConfiguration.cs" />
-    <Compile Include="Messaging\EventStore\Configuration\EventStoreMessageStorageConfigurationException.cs" />
-    <Compile Include="Messaging\EventStore\EventAppendedEventArgs.cs" />
-    <Compile Include="Messaging\EventStore\EventStoreConnector.cs" />
-    <Compile Include="Messaging\EventStore\EventStoreJsonSerialiser.cs" />
-    <Compile Include="Messaging\EventStore\MessageExtensions.cs" />
-    <Compile Include="Messaging\EventStore\MessageStorageMode.cs" />
-    <Compile Include="Messaging\EventStore\EventStoreUrl.cs" />
-    <Compile Include="Messaging\EventStore\EventStoreUserCredentials.cs" />
-    <Compile Include="Messaging\EventStore\NonPersistentEventStore.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\SubscribeEventStreamConnectionContext.cs" />
-    <Compile Include="Messaging\EventStore\Subscribing\SubscribeEventStreamConnector.cs" />
-    <Compile Include="Messaging\EventStore\Writing\WriteEventStreamConnection.cs" />
-    <Compile Include="Messaging\EventStore\Writing\WriteEventStreamConnector.cs" />
     <Compile Include="Messaging\Http\HttpCommandDispatcherFactory.cs" />
     <Compile Include="Messaging\Http\HttpCommandDispatchingEndpoint.cs" />
     <Compile Include="Messaging\Http\HttpCommandDispatchingEndpointBuilder.cs" />
@@ -253,8 +210,6 @@
     <Compile Include="Messaging\Http\HttpSendMessagePipe.cs" />
     <Compile Include="Messaging\Http\HttpSendRequestMessagePipe.cs" />
     <Compile Include="Messaging\Http\MessageReceiverUrl.cs" />
-    <Compile Include="Messaging\Sagas\DbSagaStateRepository.cs" />
-    <Compile Include="Messaging\Sagas\SagaPersistenceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

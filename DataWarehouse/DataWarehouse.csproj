@@ -49,28 +49,32 @@
       <HintPath>..\packages\AppliedSystems.Core.3.0.209\lib\net\AppliedSystems.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Data, Version=2.1.167.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Data.2.1.167\lib\net\AppliedSystems.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Data, Version=2.1.171.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Data.2.1.171\lib\net\AppliedSystems.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.330.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.330\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.164.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.164\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.EventStore, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.EventStore.1.0.7\lib\net\AppliedSystems.Messaging.EventStore.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.168.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.168\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.198.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.198\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.201.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.201\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.320.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.320\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.201.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.201\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.330.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.330\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Messaging.Messages, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
@@ -91,6 +95,10 @@
     </Reference>
     <Reference Include="AppliedSystems.Xml, Version=2.0.99.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AppliedSystems.Xml.2.0.99\lib\net\AppliedSystems.Xml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EventStore.ClientAPI, Version=3.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventStore.Client.3.9.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

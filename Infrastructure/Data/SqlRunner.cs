@@ -3,7 +3,6 @@ namespace AppliedSystems.Infrastucture.Data
     using System;
     using System.Data;
     using AppliedSystems.Data.Connections;
-    using Microsoft.AspNet.SignalR.Client;
 
     public class SqlRunner
     {

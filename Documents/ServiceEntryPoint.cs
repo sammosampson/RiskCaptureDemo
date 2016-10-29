@@ -47,8 +47,7 @@
 
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)
-                    .RegisterBuildAction(c => c.RegisterInstance<IConnectionFactory, SqlConnectionFactory>())
-                    .SetupData()
+                    .SetupDataConnectivity().WithSqlConnection()
                     .SetupMessaging()
                         .ConfigureReceivingEndpoint(httpReceivingEndpoint)
                         .ConfigureMessageRouting().WireUpRouting()

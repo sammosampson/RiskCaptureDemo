@@ -4,21 +4,14 @@
     using System.Diagnostics;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
-    using AppliedSystems.Data.Connections;
     using AppliedSystems.DataWarehouse.Configuration;
     using AppliedSystems.Infrastucture.Data;
-    using AppliedSystems.Infrastucture.Messaging.EventStore;
-    using AppliedSystems.Infrastucture.Messaging.EventStore.Bootstrapping;
-    using AppliedSystems.Infrastucture.Messaging.EventStore.Configuration;
-    using AppliedSystems.Infrastucture.Messaging.EventStore.Subscribing;
     using AppliedSystems.Infrastucture.Messaging.Http;
-    using AppliedSystems.Infrastucture.Messaging.Sagas;
-    using AppliedSystems.Messaging.Http;
-    using AppliedSystems.Messaging.Infrastructure.Pipelines;
-    using AppliedSystems.Messaging.Infrastructure.Requests;
-    using AppliedSystems.Messaging.Infrastructure.Requests.Outgoing.InProcess;
-    using AppliedSystems.Messaging.Infrastructure.Sagas.Bootstrapping;
-    using AppliedSystems.Messaging.Messages;
+    using AppliedSystems.Messaging.Data.Bootstrapping;
+    using AppliedSystems.Messaging.EventStore;
+    using AppliedSystems.Messaging.EventStore.Bootstrapping;
+    using AppliedSystems.Messaging.EventStore.Configuration;
+    using AppliedSystems.Messaging.Infrastructure.Sagas;
     using Bootstrapping;
     using Core;
     using Data.Bootstrapping;
@@ -46,14 +39,13 @@
 
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)
-                    .RegisterBuildAction(c => c.RegisterInstance<IConnectionFactory, SqlConnectionFactory>())
-                    .SetupData()
+                    .SetupDataConnectivity().WithSqlConnection()
                     .SetupMessaging()
-                        .ConfigureSagas().WithDatabasePersistence()
-                        .ConfigureEventStoreSubscriber<SqlEventIndexStore>()
-                        .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
-                        .ConfigureRequestDispatchingEndpoint(riskCaptureRequestEndpoint)
-                        .ConfigureMessageRouting().WireUpRouting(riskCaptureRequestEndpoint)
+                    .ConfigureSagas().WithDatabasePersistence()
+                    .ConfigureSubscriptions().WithDatabasePersistence()
+                    .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
+                    .ConfigureRequestDispatchingEndpoint(riskCaptureRequestEndpoint)
+                    .ConfigureMessageRouting().WireUpRouting(riskCaptureRequestEndpoint)
                     .Initialise();
 
                 Trace.TraceInformation(
@@ -76,4 +68,5 @@
         }
 
     }
+
 }
