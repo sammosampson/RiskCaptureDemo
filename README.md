@@ -41,7 +41,7 @@ This will create a projection from the risk capture map stream that will allow t
 Now to process some risk, using something like "postman" POST the following to http://localhost/RiskCapture/risk with a Content-Type application/xml header set:
 (Change the Sequenceid GUID on subsequent posts and try adding new section items in)
 
-<ISMessage Direction="Request" Version="2.0" Function="PutTransRequest">
+```<ISMessage Direction="Request" Version="2.0" Function="PutTransRequest">
 	<ISHeader>
 		<SequenceID>6776193E-E1BD-43AC-B620-3DFEAF9B92B2</SequenceID>
 	</ISHeader>
@@ -202,6 +202,6 @@ Now to process some risk, using something like "postman" POST the following to h
 			</PolData>
 		</PolMessage>
 	</ISBody>
-</ISMessage>
+</ISMessage>```
 
 
