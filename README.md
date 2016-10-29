@@ -4,7 +4,7 @@ To run this example:
 
 Create two local sql databases
 - RiskCaptureDemo.Documents
-- RiskCaptureDemo.Datawarehouse
+- RiskCaptureDemo.DataWarehouse
 
 And run the sql files found in the root of this repository against them respectively
 
