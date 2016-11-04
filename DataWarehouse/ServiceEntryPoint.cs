@@ -9,8 +9,8 @@
     using AppliedSystems.Infrastucture.Messaging.Http;
     using AppliedSystems.Messaging.Data.Bootstrapping;
     using AppliedSystems.Messaging.EventStore;
-    using AppliedSystems.Messaging.EventStore.Bootstrapping;
     using AppliedSystems.Messaging.EventStore.Configuration;
+    using AppliedSystems.Messaging.EventStore.Subscribing;
     using AppliedSystems.Messaging.Infrastructure.Sagas;
     using Bootstrapping;
     using Core;
@@ -42,7 +42,7 @@
                     .SetupDataConnectivity().WithSqlConnection()
                     .SetupMessaging()
                     .ConfigureSagas().WithDatabasePersistence()
-                    .ConfigureSubscriptions().WithDatabasePersistence()
+                    .ConfigureEventIndexStorage().WithDatabasePersistence()
                     .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
                     .ConfigureRequestDispatchingEndpoint(riskCaptureRequestEndpoint)
                     .ConfigureMessageRouting().WireUpRouting(riskCaptureRequestEndpoint)

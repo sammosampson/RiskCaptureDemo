@@ -6,7 +6,6 @@
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
     using AppliedSystems.Messaging.EventStore;
-    using AppliedSystems.Messaging.EventStore.Bootstrapping;
     using AppliedSystems.Messaging.EventStore.Configuration;
     using AppliedSystems.Messaging.Http.Receiving;
     using AppliedSystems.Messaging.Http.Receiving.Bootstrapping;

@@ -11,8 +11,8 @@
     using AppliedSystems.Infrastucture.Messaging.Http;
     using AppliedSystems.Messaging.Data.Bootstrapping;
     using AppliedSystems.Messaging.EventStore;
-    using AppliedSystems.Messaging.EventStore.Bootstrapping;
     using AppliedSystems.Messaging.EventStore.Configuration;
+    using AppliedSystems.Messaging.EventStore.Subscribing;
     using AppliedSystems.Messaging.Infrastructure.Bootstrapping;
     using Topshelf;
 
@@ -25,6 +25,15 @@
             HttpRequestDispatcherEndpoint riskCaptureRequestEndpoint = HttpRequestDispatcherEndpoint.ForUrl(config.RiskCaptureUrl);
 
             var eventSubscriptionConfig = EventStoreSubscriptionConfiguration.FromAppConfig();
+
+            var eventStorageConfig = EventStoreMessageStorageConfiguration.FromAppConfig();
+
+            var eventStoreEndpoint = EventStoreEndpoint
+                .OnUrl(EventStoreUrl.Parse(eventStorageConfig.Url))
+                .WithCredentials(
+                    EventStoreUserCredentials.Parse(
+                        eventStorageConfig.UserCredentials.User,
+                        eventStorageConfig.UserCredentials.Password));
 
             var eventStoreSubscriptionEndpoint = EventStoreSubscriptionEndpoint
                 .ListenTo(EventStoreUrl.Parse(eventSubscriptionConfig.Url))
@@ -43,7 +52,8 @@
                     .SetupDataConnectivity().WithSqlConnection()
                     .SetupMessaging()
                         .ConfigureSagas().WithDatabasePersistence()
-                        .ConfigureSubscriptions().WithDatabasePersistence()
+                        .ConfigureEventIndexStorage().WithEventStorePersistence()
+                        .ConfigureEventStoreEndpoint(eventStoreEndpoint)
                         .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
                         .ConfigureRequestDispatchingEndpoint(riskCaptureRequestEndpoint)
                         .ConfigureCommandDispatchingEndpoint(documentsEndpoint)
