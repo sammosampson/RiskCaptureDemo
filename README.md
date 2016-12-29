@@ -19,32 +19,46 @@ http://127.0.0.1:2113/web/index.html#/projections (click 'enable all')
 
 add a continuous emitting projection in eventstore called RiskCapture Indexer with the body:
 
+```
 fromCategory("riskcapture")
   .whenAny(function(s,e) {
     linkTo('riskcaptures',e);
   });
-  
+``` 
 This will link events from all streams in the category of riskcapture to a stream called riskcaptures so that subscribers can get all events in this category in one subscription
 
-add another continuous emitting projection in eventstore called RiskCapture Lookup with the body:
-
-fromStream("riskcapture-riskcapturemap")
+add another continuous emitting projection in eventstore called RiskCaptureItem To DataWarehouse Column Lookup with the body:
+```
+fromStream("riskcapture-riskcapturemap") 
 .when( 
-{ 
-    newRiskItemMapped : function(s,e) 
-    {
-        emit(
-            "riskcaptureprojections-riskcapturemaplookup-" + e.body.ProductLine, 
-            "lookup", 
-            {
-                "itemId" : e.body.RiskItemId,
-                "sectionName" : e.body.SectionName,
-                "itemName" : e.body.ItemName
-            });
-    }
+    { newRiskItemMapped : function(s,e) { 
+        emit( 
+            "riskcaptureprojections-riskcaptureitemtodatawarehousecolumnlookup-" + e.body.ProductLine, 
+            "lookup", { 
+                "itemId" : e.body.RiskItemId, 
+                "tableName" : e.body.SectionName, 
+                "columnName" : e.body.ItemName 
+            }); 
+    } 
 });
+```
+This will create a projection from the risk capture map stream that will allow the lookup of the table and column name for the item id for the data warehouse service.
 
-This will create a projection from the risk capture map stream that will allow the lookup of items by id.
+add yet another continuous emitting projection in eventstore called RiskCaptureItem To Documents Field Lookup with the body:
+```
+fromStream("riskcapture-riskcapturemap") 
+.when( 
+    { newRiskItemMapped : function(s,e) { 
+        emit( 
+            "riskcaptureprojections-riskcaptureitemtodocumentfieldlookup-" + e.body.ProductLine, 
+            "lookup", { 
+                "itemId" : e.body.RiskItemId, 
+                "fieldName" : e.body.SectionName
+            }); 
+    } 
+});
+```
+This will create a projection from the risk capture map stream that will allow the lookup of the table and column name for the item id for the data warehouse service.
 
 Now to process some risk, using something like "postman" POST the following to http://localhost/RiskCapture/risk with a Content-Type application/xml header set:
 (Change the Sequenceid GUID on subsequent posts and try adding new section items in)
@@ -210,6 +224,7 @@ Now to process some risk, using something like "postman" POST the following to h
 			</PolData>
 		</PolMessage>
 	</ISBody>
-</ISMessage>```
+</ISMessage>
+```
 
 
