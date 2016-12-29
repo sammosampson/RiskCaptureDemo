@@ -2,8 +2,8 @@ namespace AppliedSystems.RiskCapture.Mapping
 {
     using System;
     using System.Xml.Linq;
+    using AppliedSystems.Domain.EventSourced;
     using AppliedSystems.Infrastucture;
-    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
     using AppliedSystems.Polaris;
     using AppliedSystems.RatingHub.Xml.Body.PolMessage.PolData;
     using AppliedSystems.RiskCapture.Messages;

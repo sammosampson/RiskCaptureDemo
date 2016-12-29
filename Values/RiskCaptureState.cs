@@ -1,6 +1,6 @@
 namespace AppliedSystems.RiskCapture.Values
 {
-    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    using AppliedSystems.Domain.EventSourced;
 
     public class RiskCaptureState : AggregateState
     {

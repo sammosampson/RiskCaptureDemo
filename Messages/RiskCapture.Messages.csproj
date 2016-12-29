@@ -48,8 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LookupRiskCaptureItemMapping.cs" />
-    <Compile Include="LookupRiskCaptureItemMappingResponse.cs" />
     <Compile Include="NewRiskItemMapped.cs" />
     <Compile Include="NewRiskProductLineMapped.cs" />
     <Compile Include="NewRiskSectionMapped.cs" />

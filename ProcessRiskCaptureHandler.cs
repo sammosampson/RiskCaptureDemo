@@ -1,12 +1,12 @@
 namespace AppliedSystems.RiskCapture
 {
     using System;
+    using AppliedSystems.Domain.EventSourced;
     using AppliedSystems.Infrastucture;
     using AppliedSystems.RatingHub.Xml.Header;
     using AppliedSystems.RiskCapture.Mapping;
     using AppliedSystems.RiskCapture.Values;
     using AppliedSystems.Xml;
-    using Infrastucture.Messaging.EventSourcing;
     using Messages;
     using Messaging.Infrastructure.Commands;
     using Nancy.ModelBinding;

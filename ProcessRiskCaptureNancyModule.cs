@@ -1,6 +1,6 @@
 namespace AppliedSystems.RiskCapture
 {
-    using AppliedSystems.Messaging.Http.Receiving;
+    using AppliedSystems.Infrastucture;
     using AppliedSystems.Messaging.Infrastructure;
     using AppliedSystems.RiskCapture.Messages;
     using Nancy;

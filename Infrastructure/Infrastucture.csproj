@@ -42,60 +42,44 @@
       <HintPath>..\packages\AppliedSystems.Collections.1.0.113\lib\net\AppliedSystems.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Configuration, Version=1.0.57.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Configuration.1.0.57\lib\net\AppliedSystems.Configuration.dll</HintPath>
+    <Reference Include="AppliedSystems.Configuration, Version=1.0.65.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Configuration.1.0.65\lib\net\AppliedSystems.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Core, Version=3.0.209.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AppliedSystems.Core.3.0.209\lib\net\AppliedSystems.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Data, Version=2.1.171.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Data.2.1.171\lib\net\AppliedSystems.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Data, Version=2.1.177.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Data.2.1.177\lib\net\AppliedSystems.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.340.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.340\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Data, Version=3.0.398.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.398\lib\net\AppliedSystems.Messaging.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Messaging.EventStore, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.EventStore.1.0.18\lib\net\AppliedSystems.Messaging.EventStore.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http, Version=1.1.174.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.1.1.174\lib\net\AppliedSystems.Messaging.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving, Version=1.0.208.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.208\lib\net\AppliedSystems.Messaging.Http.Receiving.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AppliedSystems.Messaging.Http.Receiving.SystemDot, Version=1.0.208.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.Http.Receiving.1.0.208\lib\net\AppliedSystems.Messaging.Http.Receiving.SystemDot.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.340.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Messaging.3.0.340\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
+    <Reference Include="AppliedSystems.Messaging.Infrastructure, Version=3.0.398.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Messaging.3.0.398\lib\net\AppliedSystems.Messaging.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AppliedSystems.Messaging.Messages, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AppliedSystems.Messaging.Messages.1.0.8\lib\net\AppliedSystems.Messaging.Messages.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Polaris, Version=1.0.104.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Polaris.1.0.104\lib\net\AppliedSystems.Polaris.dll</HintPath>
+    <Reference Include="AppliedSystems.Polaris, Version=1.0.112.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Polaris.1.0.112\lib\net\AppliedSystems.Polaris.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.RatingHub.Xml, Version=1.1.271.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.RatingHub.Xml.1.1.271\lib\net\AppliedSystems.RatingHub.Xml.dll</HintPath>
+    <Reference Include="AppliedSystems.RatingHub.Xml, Version=1.1.301.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.RatingHub.Xml.1.1.301\lib\net\AppliedSystems.RatingHub.Xml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Security, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Security.1.0.2\lib\net\AppliedSystems.Security.dll</HintPath>
+    <Reference Include="AppliedSystems.Security, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Security.1.0.8\lib\net\AppliedSystems.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AppliedSystems.Xml, Version=2.0.99.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AppliedSystems.Xml.2.0.99\lib\net\AppliedSystems.Xml.dll</HintPath>
+    <Reference Include="AppliedSystems.Xml, Version=2.0.100.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AppliedSystems.Xml.2.0.100\lib\net\AppliedSystems.Xml.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -188,29 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GreenLogger.cs" />
-    <Compile Include="Messaging\EventSourcing\AggregateEntity.cs" />
-    <Compile Include="Messaging\EventSourcing\AggregateId.cs" />
-    <Compile Include="Messaging\EventSourcing\AggregateRoot.cs" />
-    <Compile Include="Messaging\EventSourcing\AggregateState.cs" />
-    <Compile Include="Messaging\EventSourcing\ApplyMethodConventionEventToHandlerRouter.cs" />
-    <Compile Include="Messaging\EventSourcing\ConventionEventToHandlerRouter.cs" />
-    <Compile Include="Messaging\EventSourcing\DomainRepository.cs" />
-    <Compile Include="Messaging\EventSourcing\EventSourceEventArgs.cs" />
-    <Compile Include="Messaging\EventSourcing\EventSourcingUnitOfWork.cs" />
-    <Compile Include="Messaging\EventSourcing\IAggregateRoot.cs" />
-    <Compile Include="Messaging\EventSourcing\SourcedEventHandler.cs" />
     <Compile Include="Data\SqlRunner.cs" />
-    <Compile Include="Messaging\Http\HttpCommandDispatcherFactory.cs" />
-    <Compile Include="Messaging\Http\HttpCommandDispatchingEndpoint.cs" />
-    <Compile Include="Messaging\Http\HttpCommandDispatchingEndpointBuilder.cs" />
-    <Compile Include="Messaging\Http\HttpPoster.cs" />
-    <Compile Include="Messaging\Http\HttpRequestDispatcherEndpoint.cs" />
-    <Compile Include="Messaging\Http\HttpRequestDispatcherEndpointBuilder.cs" />
-    <Compile Include="Messaging\Http\HttpRequestDispatcherFactory.cs" />
-    <Compile Include="Messaging\Http\HttpSendMessagePipe.cs" />
-    <Compile Include="Messaging\Http\HttpSendRequestMessagePipe.cs" />
-    <Compile Include="Messaging\Http\MessageReceiverUrl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreamExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

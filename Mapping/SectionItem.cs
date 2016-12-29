@@ -3,8 +3,8 @@ namespace AppliedSystems.RiskCapture.Mapping
     using System;
     using System.Linq;
     using System.Xml.Linq;
+    using AppliedSystems.Domain.EventSourced;
     using AppliedSystems.Infrastucture;
-    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
     using AppliedSystems.RatingHub.Xml.Attributes;
 
     public class SectionItem : AggregateEntity<SectionItemState>

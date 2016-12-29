@@ -1,9 +1,10 @@
 namespace AppliedSystems.RiskCapture.Mapping
 {
     using System;
+    using AppliedSystems.Domain.EventSourced;
     using AppliedSystems.Infrastucture;
-    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
     using AppliedSystems.Polaris;
+    using AppliedSystems.RatingHub.Xml;
     using AppliedSystems.RatingHub.Xml.Body.Requests;
     using AppliedSystems.RiskCapture.Messages;
     using AppliedSystems.Xml;
@@ -18,7 +19,7 @@ namespace AppliedSystems.RiskCapture.Mapping
         {
             GreenLogger.Log("Extract risk capture map from request");
 
-            RequestBodyElement body = request.ToXDocument().GetRequestBody();
+            RequestBodyElement body = request.ToXDocument().GetInsureServeMessage().RequestBody;
             ProductLineCode productLine = ProductLineCode.Parse(body.BusinessTransaction.ProductLineCode.Value);
 
             if (!State.ProductLines.ContainsKey(productLine))
@@ -34,7 +35,7 @@ namespace AppliedSystems.RiskCapture.Mapping
         {
             GreenLogger.Log("Extracting capture from request");
 
-            RequestBodyElement body = request.ToXDocument().GetRequestBody();
+            RequestBodyElement body = request.ToXDocument().GetInsureServeMessage().RequestBody;
             ProductLineCode code = ProductLineCode.Parse(body.BusinessTransaction.ProductLineCode.Value);
 
             State.ProductLines[code].ExtractCaptureFromRisk(body.PolMessage.InputPolData, onValueExtraction);

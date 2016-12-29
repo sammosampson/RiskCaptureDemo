@@ -1,4 +1,4 @@
-﻿USE [RiskCaptureDemo.DataWarehouse]
+﻿USE [AppliedMessagingExamples.SubscriberWithLocalEventIndexStorage]
 GO
 
 CREATE TABLE [dbo].[EventIndexStore](

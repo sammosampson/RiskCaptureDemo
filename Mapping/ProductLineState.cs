@@ -1,7 +1,7 @@
 namespace AppliedSystems.RiskCapture.Mapping
 {
     using System.Collections.Generic;
-    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    using AppliedSystems.Domain.EventSourced;
     using AppliedSystems.Polaris;
     using AppliedSystems.RiskCapture.Messages;
 

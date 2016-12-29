@@ -34,14 +34,9 @@
 
         public void When(RiskItemValueCaptured message)
         {
-            var response = Then<LookupRiskCaptureItemMapping, LookupRiskCaptureItemMappingResponse>(
-                new LookupRiskCaptureItemMapping(message.ProductLine, message.ItemId));
-            
             Then(new UpdateRiskTableColumnValue(
               State.ProductLine,
-              response.SectionName,
               message.RiskCaptureId,
-              response.ItemName,
               message.Value));
         }
     }

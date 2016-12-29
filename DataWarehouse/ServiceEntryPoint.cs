@@ -4,15 +4,13 @@
     using System.Diagnostics;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
-    using AppliedSystems.DataWarehouse.Configuration;
-    using AppliedSystems.Infrastucture.Data;
-    using AppliedSystems.Infrastucture.Messaging.Http;
+    using AppliedSystems.DataWarehouse.Bootstrapping;
     using AppliedSystems.Messaging.Data.Bootstrapping;
-    using AppliedSystems.Messaging.EventStore;
-    using AppliedSystems.Messaging.EventStore.Configuration;
-    using AppliedSystems.Messaging.EventStore.Subscribing;
-    using AppliedSystems.Messaging.Infrastructure.Sagas;
-    using Bootstrapping;
+    using AppliedSystems.Messaging.EventStore.GES;
+    using AppliedSystems.Messaging.EventStore.GES.Configuration;
+    using AppliedSystems.Messaging.EventStore.GES.Subscribing;
+    using AppliedSystems.Messaging.Infrastructure.Events.Streams;
+    using AppliedSystems.RiskCapture.Messages;
     using Core;
     using Data.Bootstrapping;
     using Messaging.Infrastructure.Bootstrapping;
@@ -28,24 +26,33 @@
 
                 var eventSubscriptionConfig = EventStoreSubscriptionConfiguration.FromAppConfig();
 
+                var eventStoreUrl = EventStoreUrl.Parse(eventSubscriptionConfig.Url);
+
+                var eventStoreUserCredentials = EventStoreUserCredentials.Parse(
+                    eventSubscriptionConfig.UserCredentials.User,
+                    eventSubscriptionConfig.UserCredentials.Password);
+
+                var eventTypeResolution = EventTypeFromNameResolver.FromTypesFromAssemblyContaining<NewRiskItemMapped>();
+
+                var eventStoreEndpoint = EventStoreEndpoint
+                    .OnUrl(eventStoreUrl)
+                    .WithCredentials(eventStoreUserCredentials)
+                    .WithEventTypeFromNameResolution(eventTypeResolution);
+
                 var eventStoreSubscriptionEndpoint = EventStoreSubscriptionEndpoint
-                    .ListenTo(EventStoreUrl.Parse(eventSubscriptionConfig.Url))
-                    .WithCredentials(
-                        EventStoreUserCredentials.Parse(
-                            eventSubscriptionConfig.UserCredentials.User,
-                            eventSubscriptionConfig.UserCredentials.Password));
-
-                var riskCaptureRequestEndpoint = HttpRequestDispatcherEndpoint.ForUrl(DataWarehousingConfiguration.FromAppConfig().RiskCaptureUrl);
-
+                    .ListenTo(eventStoreUrl)
+                    .WithCredentials(eventStoreUserCredentials)
+                    .WithEventTypeFromNameResolution(eventTypeResolution)
+                    .WithSqlDatabaseEventIndexStorage();
+                
                 Bootstrap.Application()
                     .ResolveReferencesWith(container)
                     .SetupDataConnectivity().WithSqlConnection()
                     .SetupMessaging()
                     .ConfigureSagas().WithDatabasePersistence()
-                    .ConfigureEventIndexStorage().WithDatabasePersistence()
+                    .ConfigureEventStoreEndpoint(eventStoreEndpoint)
                     .ConfigureReceivingEndpoint(eventStoreSubscriptionEndpoint)
-                    .ConfigureRequestDispatchingEndpoint(riskCaptureRequestEndpoint)
-                    .ConfigureMessageRouting().WireUpRouting(riskCaptureRequestEndpoint)
+                    .ConfigureMessageRouting().WireUpRouting()
                     .Initialise();
 
                 Trace.TraceInformation(

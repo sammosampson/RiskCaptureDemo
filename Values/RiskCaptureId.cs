@@ -1,7 +1,7 @@
 namespace AppliedSystems.RiskCapture.Values
 {
     using System;
-    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    using AppliedSystems.Domain.EventSourced;
 
     public class RiskCaptureId : AggregateId
     {

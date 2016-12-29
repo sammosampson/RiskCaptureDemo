@@ -2,7 +2,7 @@ namespace AppliedSystems.RiskCapture.Mapping
 {
     using System;
     using System.Collections.Generic;
-    using AppliedSystems.Infrastucture.Messaging.EventSourcing;
+    using AppliedSystems.Domain.EventSourced;
     using AppliedSystems.RiskCapture.Messages;
 
     public class SectionState : AggregateState

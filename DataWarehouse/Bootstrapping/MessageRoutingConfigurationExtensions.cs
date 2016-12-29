@@ -7,7 +7,7 @@ namespace AppliedSystems.DataWarehouse.Bootstrapping
 
     public static class MessageRoutingConfigurationExtensions
     {
-        public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config, IRequestDispatchingEndpoint riskCaptureRequestEndpoint)
+        public static MessageRoutingConfiguration WireUpRouting(this MessageRoutingConfiguration config)
         {
             return config
                 .Incoming.ForEvents
@@ -25,9 +25,7 @@ namespace AppliedSystems.DataWarehouse.Bootstrapping
                     .Handle<CreateRiskTable>().With<CreateRiskTableHandler>()
                     .Handle<CreateRiskTableColumn>().With<CreateRiskTableColumnHandler>()
                     .Handle<UpdateRiskTableColumnValue>().With<UpdateRiskTableColumnValueHandler>()
-                .Outgoing.ForRequests
-                    .Handle<LookupRiskCaptureItemMapping, LookupRiskCaptureItemMappingResponse>()
-                    .ViaEndpoint(riskCaptureRequestEndpoint);
+                .Outgoing.ForRequests;
         }
     }
 }

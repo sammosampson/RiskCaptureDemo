@@ -2,19 +2,16 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Net.Http;
     using SystemDot.Bootstrapping;
     using SystemDot.Ioc;
-    using AppliedSystems.Messaging.EventStore;
-    using AppliedSystems.Messaging.EventStore.Configuration;
-    using AppliedSystems.Messaging.Http.Receiving;
-    using AppliedSystems.Messaging.Http.Receiving.Bootstrapping;
-    using AppliedSystems.Messaging.Http.Receiving.Configuration;
-    using AppliedSystems.Messaging.Infrastructure.Receiving;
-    using AppliedSystems.RiskCapture.Configuration;
+    using AppliedSystems.Messaging.EventStore.GES;
+    using AppliedSystems.Messaging.EventStore.GES.Configuration;
+    using AppliedSystems.Messaging.Infrastructure.Events.Streams;
+    using AppliedSystems.RiskCapture.Messages;
+    using Messaging.Infrastructure.Receiving;
+    using Configuration;
     using Bootstrapping;
     using Core;
-    using Data.Bootstrapping;
     using Messaging.Infrastructure.Bootstrapping;
     using Topshelf;
 
@@ -30,11 +27,8 @@
                 .WithCredentials(
                     EventStoreUserCredentials.Parse(
                         eventStorageConfig.UserCredentials.User,
-                        eventStorageConfig.UserCredentials.Password));
-
-            var receiverConfig = HttpMessageReceivingConfiguration.FromAppConfig();
-
-            HttpReceivePoint receivingEndpoint = HttpReceivePoint.ListenOn(HttpMessagingReceiverUrl.Parse(receiverConfig.Url));
+                        eventStorageConfig.UserCredentials.Password))
+                .WithEventTypeFromNameResolution(EventTypeFromNameResolver.FromTypesFromAssemblyContaining<NewRiskItemMapped>());
 
             HostFactory.Run(configurator =>
             {
@@ -44,8 +38,6 @@
                     .ResolveReferencesWith(container)
                     .ConfigureRiskCapture()
                     .SetupMessaging()
-                        .SetupHttpMessageReceiving()
-                        .ConfigureReceivingEndpoint(receivingEndpoint)
                         .ConfigureEventStoreEndpoint(eventStoreEndpoint)
                         .ConfigureMessageRouting().WireUpRouting()
                     .Initialise();
