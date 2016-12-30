@@ -42,7 +42,7 @@ fromStream("riskcapture-riskcapturemap")
     } 
 });
 ```
-This will create a projection from the risk capture map stream that will allow the lookup of the table and column name for the item id for the data warehouse service.
+This will create a projection from the risk capture map stream that will allow the lookup of the table and column name given the risk capture item id for the data warehouse service.
 
 add yet another continuous emitting projection in eventstore called RiskCaptureItem To Documents Field Lookup with the body:
 ```
@@ -58,7 +58,7 @@ fromStream("riskcapture-riskcapturemap")
     } 
 });
 ```
-This will create a projection from the risk capture map stream that will allow the lookup of the table and column name for the item id for the data warehouse service.
+This will create a projection from the risk capture map stream that will allow the lookup of the field name given the risk capture item id for the document merge service.
 
 Now to process some risk, using something like "postman" POST the following to http://localhost/RiskCapture/risk with a Content-Type application/xml header set:
 (Change the Sequenceid GUID on subsequent posts and try adding new section items in)
